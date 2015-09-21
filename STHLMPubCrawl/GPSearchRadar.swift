@@ -14,6 +14,8 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     
     static let sharedInstance = GPSearchRadar()
     
+    var currentPlace:GPPlace? = nil
+    
     // SearchRadar has a search query and a delta distance
     // the delta distance tells the radar after how many meters it shoudl update the query.
     
@@ -37,7 +39,7 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     var desiredAccuracy:Double = 10
     
     /// How many results does the radar want from the GPPlacesSearchQuery at maximum.
-    var maxNumberOfResults:Int = 100
+    var maxNumberOfResults:Int = 50
     
     /// This is the locationmanager for the service. It uses the standard location service, which allows you to specify the desired accuracy of the location data and receive updates as the location changes.
     private let locationManager:CLLocationManager = CLLocationManager()
@@ -59,7 +61,7 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
         print("configured location manager for the GPSearchRadar")
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.delegate = self
-        self.locationManager.distanceFilter = 200
+        self.locationManager.distanceFilter = 2000
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         self.locationManager.activityType = CLActivityType.Other
         self.locationManager.startUpdatingLocation()
@@ -108,8 +110,8 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
                 return
             }
         }
-        
-        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kGPSearchRadarNewResultsNotifier, object: self))
+        print("posting notification: \(kGPSearchRadarNewResultsNotifier)")
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "kGPSearchRadarNewResultsNotifier", object: self))
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
