@@ -11,25 +11,18 @@ import MapKit
 
 
 
-class InitialViewController: UIViewController, CLLocationManagerDelegate, GooglePlacesDelegate, MKMapViewDelegate{
-    
-    let beeper = Beeper()
+class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
 
     @IBOutlet var map: MKMapView!
-    var gpbarviewcontroller = GPPlaceViewController()
-    
     @IBOutlet var GPPlaceView: UIView!
+//    
+//    lazy var locationManager:CLLocationManager = {
+//        print("initializing locationManager")
+//        var temoraryLocationManager = CLLocationManager()
+//        temoraryLocationManager.delegate = self
+//        return temoraryLocationManager
+//    }()
     
-    lazy var locationManager:CLLocationManager = {
-        print("initializing locationManager")
-        var temoraryLocationManager = CLLocationManager()
-        temoraryLocationManager.delegate = self
-        return temoraryLocationManager
-    }()
-    
-    let GPQuery = GPPlacesSearchQuery (key: nil, rankByDistance: true, keyword: nil, language: nil, minPrice: nil, maxPrice: nil, name: nil, openNow: nil, types: [kGPTypeBar, kGPTypeNightClub])
-    
-    var lastLocation:CLLocation!
     var shouldCenter:Bool = true
 
     
@@ -38,75 +31,31 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, Google
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSonarResultsAvailable", name: kGPSearchRadarNewResultsNotifier, object: nil)
         // Do any additional setup after loading the view, typically from a nib.
         //var initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-        CLLocationManager.locationServicesEnabled()
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        print("location accuracy \(kCLLocationAccuracyBest)")
-        locationManager.startUpdatingLocation()
-        print("authorisation status: \( CLLocationManager.authorizationStatus().rawValue)")
+        
         map.showsPointsOfInterest = false
         map.showsUserLocation = true
-        GPQuery?.delegate = self
+        map.showAnnotations(map.annotations, animated: true)
+
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.gpbarviewcontroller = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as! GPPlaceViewController
+        // let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-         self.GPPlaceView.addSubview(self.gpbarviewcontroller.view)
         
         self.GPPlaceView.clipsToBounds = true
-        self.gpbarviewcontroller.view.frame.size = self.GPPlaceView.frame.size
+        //self.gpbarviewcontroller.view.frame.size = self.GPPlaceView.frame.size
         
         self.GPPlaceView.bounds.size = CGSizeMake(self.GPPlaceView.bounds.size.height * 1.5, self.GPPlaceView.bounds.size.width)
     }
     
     func newSonarResultsAvailable(){
         print("newSonarResultsAvailable")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func search(){
-        // This search function uses the bundeled apple search 
-        // Apple search does not really return a whole lot and
-        // they deliver just the most notable results in an area. 
-        // The whole point is to find something new not
-        // something that has been established... okay maybe not the point but at least that would be nice.
-        let searchRequest = MKLocalSearchRequest()
-        searchRequest.region = map.region
-        searchRequest.naturalLanguageQuery = "bar"
-        let search = MKLocalSearch(request: searchRequest)
-        
-        search.startWithCompletionHandler { (response, error) -> Void in
-            
-            if response != nil{
-                for item in response!.mapItems {
-                    print(item.description)
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = item.placemark.coordinate
-                    annotation.title = item.name
-                    self.map.addAnnotation(annotation)
-                }
-            }
+        if GPSearchRadar.sharedInstance.searchQuery?.searchResults.count > 0 {
+            self.dropMapItems((GPSearchRadar.sharedInstance.searchQuery?.searchResults)! , seconds: 2)
         }
     }
     
-    @IBAction func search(sender: AnyObject) {
-        self.search()
-        
-    }
-    
-    @IBAction func googleSearch(sender: AnyObject) {
-        googleSearch()
-        
-    }
-    func googleSearch(){
-        
-        print("\(NSURLAddedToDirectoryDateKey)")
-        self.GPQuery?.searchWith(self.lastLocation.coordinate)
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     @IBOutlet var button: UIButton!
@@ -116,33 +65,14 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, Google
         map.setRegion(coordinateRegion, animated: true)
     }
     
-    
-//---------------LocationManager delegation
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("received location")
-        for location in locations{
-           // println("going through the locations")
-           // if location != nil{
-                //println(mylocation.description)
-                self.lastLocation = location
-                if (shouldCenter) {
-                    shouldCenter = false
-                    centerMapOnLocation(location)
-                }
-                
-            //}
-        }
-    }
-    
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print(error.description)
     }
     
 //-------------
     func mapView(_: MKMapView, didDeselectAnnotationView view: MKAnnotationView){
-//        if let gpplace = view.annotation as? GPPlace{
-//            
-//        }
+    // deal with user selecting an annotation.
+    
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -171,21 +101,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, Google
         }
         return view
     }
-    
-    @IBAction func showAnnotations(sender: AnyObject) {
-//        var annotations = [AnyObject]()
-//        for annot in map.annotations{
-//            var annotat = annot 
-//            annotations.append(annotat)
-//        }
-        self.map.showAnnotations(self.map.annotations, animated: true)
-        }
-
-    @IBAction func getMoreResults(sender: AnyObject) {
-        GPQuery?.getNextTwentyResults()
         
-    }
-    
     
     func dropMapItems(mapItems:[GPPlace], seconds: Int){
         
@@ -206,30 +122,5 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, Google
             }
         });
     }
-    
-    //googleplaces delegation
-    func googlePlacesSearchResult(searchResult: [GPPlace]?, error: String?, sender: GPPlacesSearchQuery!) {
-        
-        if searchResult != nil{
-            if let result = searchResult{
-                for place in result{
-                    //var annot = MKAnnotation
-                }
-            }
-            
-            print("sender.results?.count\(sender.searchResults.count)")
-            if (sender.searchResults.count <= 20){
-                // if we have 20 or less all in all then this is a new result.
-                // remove all old results.
-                map.removeAnnotations(map.annotations)
-            }
-            //there are actually mapitems returned.
-            dropMapItems(searchResult!, seconds: 2)
-        }
-        else{
-            //no mapitems found with that criteria.
-        }
-    }
-
 }
 
