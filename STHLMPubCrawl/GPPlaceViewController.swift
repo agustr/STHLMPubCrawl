@@ -11,9 +11,11 @@ import UIKit
 
 class GPPlaceViewController: UIViewController {
     
-    var place:GPPlace?
-    
-    var searchRadar:GPSearchRadar?
+    var place:GPPlace?{
+        didSet{
+            self.updateUI()
+        }
+    }
     
     @IBOutlet var typesLabel: UILabel!
     @IBOutlet var labelPlaceName: UILabel!
@@ -24,16 +26,21 @@ class GPPlaceViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         // get place from file:
-        //self.getPlaceFromFile()
+        self.view.layer.masksToBounds = true
         self.place?.describe()
-        
-        self.labelPlaceName.text = place?.name
-        self.showTypes()
-
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
-        
-        dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
-            self.showPhoto()
+        self.updateUI()
+    }
+    
+    func updateUI(){
+        if self.labelPlaceName != nil{
+            self.labelPlaceName.text = place?.name
+            self.showTypes()
+            
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
+            
+            dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
+                self.showPhoto()
+            }
         }
     }
     
@@ -42,7 +49,7 @@ class GPPlaceViewController: UIViewController {
             if self.place!.photos.count > 0 {
                 let queue = dispatch_queue_create("ble", nil)
                 dispatch_async(queue, { () -> Void in
-                    let barImage = self.place?.photos[0].getImageFromWeb(nil ,maxHeight: nil)
+                    let barImage = self.place?.photos[0].getImageFromWeb(nil ,maxHeight: 1000)
                     dispatch_async(dispatch_get_main_queue()) {
                         if barImage != nil{
                             self.barImageView.image = barImage
