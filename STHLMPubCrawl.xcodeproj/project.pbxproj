@@ -7,13 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A91564D1BAF04FC00839503 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91564C1BAF04FC00839503 /* AppDelegate.swift */; };
-		8A91564F1BAF04FC00839503 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91564E1BAF04FC00839503 /* ViewController.swift */; };
-		8A9156521BAF04FC00839503 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156501BAF04FC00839503 /* Main.storyboard */; };
-		8A9156541BAF04FC00839503 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156531BAF04FC00839503 /* Assets.xcassets */; };
-		8A9156571BAF04FC00839503 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156551BAF04FC00839503 /* LaunchScreen.storyboard */; };
 		8A9156621BAF04FC00839503 /* STHLMPubCrawlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156611BAF04FC00839503 /* STHLMPubCrawlTests.swift */; };
 		8A91566D1BAF04FC00839503 /* STHLMPubCrawlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91566C1BAF04FC00839503 /* STHLMPubCrawlUITests.swift */; };
+		8A91568D1BAF056600839503 /* GPPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567B1BAF056600839503 /* GPPhoto.swift */; settings = {ASSET_TAGS = (); }; };
+		8A91568E1BAF056600839503 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A91567D1BAF056600839503 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		8A91568F1BAF056600839503 /* GPSearchRadar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567E1BAF056600839503 /* GPSearchRadar.swift */; settings = {ASSET_TAGS = (); }; };
+		8A9156901BAF056600839503 /* GPPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567F1BAF056600839503 /* GPPlaceViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		8A9156911BAF056600839503 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156801BAF056600839503 /* InitialViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		8A9156921BAF056600839503 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156811BAF056600839503 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		8A9156931BAF056600839503 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156821BAF056600839503 /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		8A9156941BAF056600839503 /* Beeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156831BAF056600839503 /* Beeper.swift */; settings = {ASSET_TAGS = (); }; };
+		8A9156951BAF056600839503 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156841BAF056600839503 /* Utilities.swift */; settings = {ASSET_TAGS = (); }; };
+		8A9156971BAF056600839503 /* GPPlacesSearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156861BAF056600839503 /* GPPlacesSearchQuery.swift */; settings = {ASSET_TAGS = (); }; };
+		8A9156981BAF056600839503 /* GPPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156871BAF056600839503 /* GPPlace.swift */; settings = {ASSET_TAGS = (); }; };
+		8A9156991BAF056600839503 /* UILabelPadded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156881BAF056600839503 /* UILabelPadded.swift */; settings = {ASSET_TAGS = (); }; };
+		8A91569A1BAF056600839503 /* place.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156891BAF056600839503 /* place.txt */; settings = {ASSET_TAGS = (); }; };
+		8A91569B1BAF056600839503 /* beer-glass-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A91568A1BAF056600839503 /* beer-glass-20.png */; settings = {ASSET_TAGS = (); }; };
+		8A91569C1BAF056600839503 /* beer-glass-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A91568B1BAF056600839503 /* beer-glass-40.png */; settings = {ASSET_TAGS = (); }; };
+		8A91569D1BAF056600839503 /* beer-glass-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A91568C1BAF056600839503 /* beer-glass-256.png */; settings = {ASSET_TAGS = (); }; };
+		8A9156A01BAF05F300839503 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569E1BAF05F300839503 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		8A9156A11BAF05F300839503 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569F1BAF05F300839503 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
+		8A9A4D741BAF488000376F2D /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8A9A4D731BAF488000376F2D /* beep.wav */; settings = {ASSET_TAGS = (); }; };
+		8AA13CA31BAF472E00AA02B1 /* Sounds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AA13CA21BAF472E00AA02B1 /* Sounds.xcassets */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,19 +49,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A3137181BAF2DC6000CBACE /* STHLMPubCrawl-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STHLMPubCrawl-Bridging-Header.h"; sourceTree = "<group>"; };
 		8A9156491BAF04FC00839503 /* STHLMPubCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STHLMPubCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A91564C1BAF04FC00839503 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8A91564E1BAF04FC00839503 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8A9156511BAF04FC00839503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8A9156531BAF04FC00839503 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8A9156561BAF04FC00839503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8A9156581BAF04FC00839503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A91565D1BAF04FC00839503 /* STHLMPubCrawlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STHLMPubCrawlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9156611BAF04FC00839503 /* STHLMPubCrawlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STHLMPubCrawlTests.swift; sourceTree = "<group>"; };
 		8A9156631BAF04FC00839503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A9156681BAF04FC00839503 /* STHLMPubCrawlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STHLMPubCrawlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A91566C1BAF04FC00839503 /* STHLMPubCrawlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STHLMPubCrawlUITests.swift; sourceTree = "<group>"; };
 		8A91566E1BAF04FC00839503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A91567B1BAF056600839503 /* GPPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPPhoto.swift; sourceTree = "<group>"; };
+		8A91567D1BAF056600839503 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8A91567E1BAF056600839503 /* GPSearchRadar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSearchRadar.swift; sourceTree = "<group>"; };
+		8A91567F1BAF056600839503 /* GPPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPPlaceViewController.swift; sourceTree = "<group>"; };
+		8A9156801BAF056600839503 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		8A9156811BAF056600839503 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A9156821BAF056600839503 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8A9156831BAF056600839503 /* Beeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beeper.swift; sourceTree = "<group>"; };
+		8A9156841BAF056600839503 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		8A9156861BAF056600839503 /* GPPlacesSearchQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPPlacesSearchQuery.swift; sourceTree = "<group>"; };
+		8A9156871BAF056600839503 /* GPPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPPlace.swift; sourceTree = "<group>"; };
+		8A9156881BAF056600839503 /* UILabelPadded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelPadded.swift; sourceTree = "<group>"; };
+		8A9156891BAF056600839503 /* place.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = place.txt; sourceTree = "<group>"; };
+		8A91568A1BAF056600839503 /* beer-glass-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-glass-20.png"; sourceTree = "<group>"; };
+		8A91568B1BAF056600839503 /* beer-glass-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-glass-40.png"; sourceTree = "<group>"; };
+		8A91568C1BAF056600839503 /* beer-glass-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-glass-256.png"; sourceTree = "<group>"; };
+		8A91569E1BAF05F300839503 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8A91569F1BAF05F300839503 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		8A9A4D731BAF488000376F2D /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
+		8AA13CA21BAF472E00AA02B1 /* Sounds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sounds.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +127,27 @@
 		8A91564B1BAF04FC00839503 /* STHLMPubCrawl */ = {
 			isa = PBXGroup;
 			children = (
-				8A91564C1BAF04FC00839503 /* AppDelegate.swift */,
-				8A91564E1BAF04FC00839503 /* ViewController.swift */,
-				8A9156501BAF04FC00839503 /* Main.storyboard */,
-				8A9156531BAF04FC00839503 /* Assets.xcassets */,
-				8A9156551BAF04FC00839503 /* LaunchScreen.storyboard */,
-				8A9156581BAF04FC00839503 /* Info.plist */,
+				8A9A4D731BAF488000376F2D /* beep.wav */,
+				8A9156861BAF056600839503 /* GPPlacesSearchQuery.swift */,
+				8A91567E1BAF056600839503 /* GPSearchRadar.swift */,
+				8A9156871BAF056600839503 /* GPPlace.swift */,
+				8A91567B1BAF056600839503 /* GPPhoto.swift */,
+				8A91567F1BAF056600839503 /* GPPlaceViewController.swift */,
+				8A9156801BAF056600839503 /* InitialViewController.swift */,
+				8A9156811BAF056600839503 /* Info.plist */,
+				8A9156821BAF056600839503 /* AppDelegate.swift */,
+				8A9156831BAF056600839503 /* Beeper.swift */,
+				8A9156841BAF056600839503 /* Utilities.swift */,
+				8AA13CA21BAF472E00AA02B1 /* Sounds.xcassets */,
+				8A91567D1BAF056600839503 /* Images.xcassets */,
+				8A9156881BAF056600839503 /* UILabelPadded.swift */,
+				8A9156891BAF056600839503 /* place.txt */,
+				8A91569E1BAF05F300839503 /* Main.storyboard */,
+				8A91569F1BAF05F300839503 /* LaunchScreen.xib */,
+				8A3137181BAF2DC6000CBACE /* STHLMPubCrawl-Bridging-Header.h */,
+				8A91568A1BAF056600839503 /* beer-glass-20.png */,
+				8A91568B1BAF056600839503 /* beer-glass-40.png */,
+				8A91568C1BAF056600839503 /* beer-glass-256.png */,
 			);
 			path = STHLMPubCrawl;
 			sourceTree = "<group>";
@@ -187,6 +232,7 @@
 		8A9156411BAF04FC00839503 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Agust Rafnsson";
 				TargetAttributes = {
@@ -228,9 +274,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A9156571BAF04FC00839503 /* LaunchScreen.storyboard in Resources */,
-				8A9156541BAF04FC00839503 /* Assets.xcassets in Resources */,
-				8A9156521BAF04FC00839503 /* Main.storyboard in Resources */,
+				8A9A4D741BAF488000376F2D /* beep.wav in Resources */,
+				8A91569B1BAF056600839503 /* beer-glass-20.png in Resources */,
+				8AA13CA31BAF472E00AA02B1 /* Sounds.xcassets in Resources */,
+				8A91569A1BAF056600839503 /* place.txt in Resources */,
+				8A91569C1BAF056600839503 /* beer-glass-40.png in Resources */,
+				8A9156A01BAF05F300839503 /* Main.storyboard in Resources */,
+				8A9156921BAF056600839503 /* Info.plist in Resources */,
+				8A91569D1BAF056600839503 /* beer-glass-256.png in Resources */,
+				8A9156A11BAF05F300839503 /* LaunchScreen.xib in Resources */,
+				8A91568E1BAF056600839503 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,8 +308,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A91564F1BAF04FC00839503 /* ViewController.swift in Sources */,
-				8A91564D1BAF04FC00839503 /* AppDelegate.swift in Sources */,
+				8A91568D1BAF056600839503 /* GPPhoto.swift in Sources */,
+				8A9156901BAF056600839503 /* GPPlaceViewController.swift in Sources */,
+				8A9156951BAF056600839503 /* Utilities.swift in Sources */,
+				8A9156981BAF056600839503 /* GPPlace.swift in Sources */,
+				8A91568F1BAF056600839503 /* GPSearchRadar.swift in Sources */,
+				8A9156931BAF056600839503 /* AppDelegate.swift in Sources */,
+				8A9156991BAF056600839503 /* UILabelPadded.swift in Sources */,
+				8A9156941BAF056600839503 /* Beeper.swift in Sources */,
+				8A9156911BAF056600839503 /* InitialViewController.swift in Sources */,
+				8A9156971BAF056600839503 /* GPPlacesSearchQuery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,25 +351,6 @@
 			targetProxy = 8A9156691BAF04FC00839503 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8A9156501BAF04FC00839503 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8A9156511BAF04FC00839503 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8A9156551BAF04FC00839503 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8A9156561BAF04FC00839503 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8A91566F1BAF04FC00839503 /* Debug */ = {
@@ -398,10 +440,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = STHLMPubCrawl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agustr.STHLMPubCrawl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "STHLMPubCrawl/STHLMPubCrawl-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -409,10 +454,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = STHLMPubCrawl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agustr.STHLMPubCrawl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "STHLMPubCrawl/STHLMPubCrawl-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -483,6 +530,7 @@
 				8A9156731BAF04FC00839503 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A9156741BAF04FC00839503 /* Build configuration list for PBXNativeTarget "STHLMPubCrawlTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +539,7 @@
 				8A9156761BAF04FC00839503 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A9156771BAF04FC00839503 /* Build configuration list for PBXNativeTarget "STHLMPubCrawlUITests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +548,7 @@
 				8A9156791BAF04FC00839503 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

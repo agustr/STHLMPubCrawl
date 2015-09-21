@@ -1,21 +1,34 @@
 //
 //  AppDelegate.swift
-//  STHLMPubCrawl
+//  SthlmBarCrawl
 //
-//  Created by Agust Rafnsson on 20/09/15.
-//  Copyright © 2015 Agust Rafnsson. All rights reserved.
+//  Created by Agust Rafnsson on 26/08/15.
+//  Copyright (c) 2015 Agust Rafnsson. All rights reserved.
 //
 
 import UIKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let googleMapsApiKey = "AIzaSyB3kmbHXmOsIbZNyG4VCUc3R48Err5pEB4"
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        //GMSServices.provideAPIKey(googleMapsApiKey)
+        //let searchRadar = GPSearchRadar.sharedInstance
+        //searchRadar.distanceFilter = 10
+        
+        //searchRadar.searchQuery = GPPlacesSearchQuery (key: nil, rankByDistance: true, keyword: nil, language: nil, minPrice: nil, maxPrice: nil, name: nil, openNow: nil, types: [kGPTypeBar, kGPTypeNightClub])
+        GPSearchRadar.sharedInstance
+        let gpQuery = GPPlacesSearchQuery (key: nil, rankByDistance: true, keyword: nil, language: nil, minPrice: nil, maxPrice: nil, name: nil, openNow: nil, types: [kGPTypeBar, kGPTypeNightClub])
+        if gpQuery != nil{
+            GPSearchRadar.sharedInstance.searchQuery = gpQuery
+        }
         return true
     }
 

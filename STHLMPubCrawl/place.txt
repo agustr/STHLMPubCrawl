@@ -1,0 +1,43 @@
+{
+"html_attributions": [],
+"results": [{
+"geometry" : {
+"location" : {
+"lat" : 37.331321,
+"lng" : -122.031754
+}
+},
+"icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+"id" : "90da8c696a00e461aeef663e25073c7c5c79f1da",
+"name" : "BJ's Restaurant & Brewhouse",
+"opening_hours" : {
+"open_now" : false,
+"weekday_text" : []
+},
+"photos" : [
+{
+"height" : 1632,
+"html_attributions" : [
+"\u003ca href=\"https://maps.google.com/maps/contrib/106470686306458418901\"\u003eLi Tao\u003c/a\u003e"
+],
+"photo_reference" : "CmRdAAAAPavQzSmULpD4PTU2ZbNS-_llgwmUtRx7xs8xpj6QUZQQDampj8idJWQXTgE0rCUIX1Hll9hvi5O49QBBSP5GHsGFqx_741STRve1coPhcc_M6slLpse2Fe4tn01xiXvMEhD6A7UT10cSfYCKRE7M_LZpGhSVL1wsxbuS3UbeGYwEs6WSpZAygg",
+"width" : 1224
+}
+],
+"place_id" : "ChIJM75zpLa1j4ARd8IiWxkW30g",
+"rating" : 3.6,
+"reference" : "CnRuAAAAONrg0KwsCSzuFF1iw5DX8Y2bQeUUntejUwVPR1j4q23ixbleouQ-lt_uoEah7yGmlp483PRjsIUOp7RjnPndcgVabMmXdqeoVx924SEe0hEAjXYHbeI0EHEg9pd67UUzxk5fo3lMi3QZHNRaHHhILRIQVLFTi9CTp3LCBOkgYf1IMRoU3vzLXfQeJFqOPMahT6QzgWKujXw",
+"scope" : "GOOGLE",
+"types" : [
+"restaurant",
+"meal_takeaway",
+"bar",
+"food",
+"point_of_interest",
+"establishment"
+],
+"vicinity" : "10690 North De Anza Boulevard, Cupertino"
+}
+],
+"status": "OK"
+}
