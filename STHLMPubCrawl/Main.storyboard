@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="No3-x1-15x">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -23,36 +23,9 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="bMF-bM-Zyq"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMV-CF-kQP">
-                                <rect key="frame" x="488" y="134" width="92" height="30"/>
-                                <state key="normal" title="Apple Search">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dba-2I-GDw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRL-IR-bws">
-                                <rect key="frame" x="437" y="96" width="143" height="30"/>
-                                <state key="normal" title="More Google Results">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="getMoreResults:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0EF-NP-Aos"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1G-ZJ-UdD">
-                                <rect key="frame" x="479" y="58" width="101" height="30"/>
-                                <state key="normal" title="Google Search">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="googleSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w5P-C9-3zp"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WqX-CQ-DWl">
-                                <rect key="frame" x="456" y="20" width="124" height="30"/>
-                                <state key="normal" title="Show Annotations">
+                                <rect key="frame" x="521" y="20" width="59" height="30"/>
+                                <state key="normal" title="Show All">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -71,28 +44,29 @@
                             <constraint firstItem="uR0-f2-5RM" firstAttribute="height" secondItem="zhc-WD-iO3" secondAttribute="height" id="BlN-Y4-Rxk"/>
                             <constraint firstItem="WqX-CQ-DWl" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Oeb-SA-DXk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zhc-WD-iO3" secondAttribute="trailing" constant="-16" id="RYb-p8-kIa"/>
-                            <constraint firstItem="h1G-ZJ-UdD" firstAttribute="top" secondItem="WqX-CQ-DWl" secondAttribute="bottom" constant="8" symbolic="YES" id="Rif-dK-7Bt"/>
                             <constraint firstItem="uR0-f2-5RM" firstAttribute="width" secondItem="zhc-WD-iO3" secondAttribute="width" id="Ugh-1Q-Elu"/>
                             <constraint firstItem="uR0-f2-5RM" firstAttribute="top" secondItem="zhc-WD-iO3" secondAttribute="bottom" id="UkJ-SU-vnR"/>
-                            <constraint firstItem="lMV-CF-kQP" firstAttribute="trailing" secondItem="gRL-IR-bws" secondAttribute="trailing" id="fTQ-zp-ADE"/>
-                            <constraint firstItem="gRL-IR-bws" firstAttribute="top" secondItem="h1G-ZJ-UdD" secondAttribute="bottom" constant="8" symbolic="YES" id="hya-qN-4UV"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="iSb-gi-gdi"/>
-                            <constraint firstItem="lMV-CF-kQP" firstAttribute="top" secondItem="gRL-IR-bws" secondAttribute="bottom" constant="8" symbolic="YES" id="jNo-hw-eSD"/>
-                            <constraint firstItem="h1G-ZJ-UdD" firstAttribute="trailing" secondItem="WqX-CQ-DWl" secondAttribute="trailing" id="mfm-oq-UFW"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uR0-f2-5RM" secondAttribute="bottom" id="r8X-9A-Ncd"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="sXf-Gs-O8B"/>
-                            <constraint firstItem="gRL-IR-bws" firstAttribute="trailing" secondItem="h1G-ZJ-UdD" secondAttribute="trailing" id="yG9-Fc-Etq"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="GPPlaceView" destination="uR0-f2-5RM" id="7a0-rc-yIB"/>
-                        <outlet property="button" destination="h1G-ZJ-UdD" id="3cB-hf-nU8"/>
                         <outlet property="map" destination="zhc-WD-iO3" id="2qc-dj-rHw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="491" y="177"/>
+        </scene>
+        <!--Bars Page View Controller-->
+        <scene sceneID="fNc-1C-36A">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="No3-x1-15x" customClass="BarsPageViewController" customModule="STHLMPubCrawl" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RIR-WF-hOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1681" y="-736"/>
         </scene>
         <!--Place View Controller-->
         <scene sceneID="ec3-Zx-40n">
