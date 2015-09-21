@@ -292,18 +292,12 @@ class GPPlacesSearchQuery{
                             self.delegate?.googlePlacesSearchResult(nil, error: "Could not continue.  HTTP Status Code was \(statusCode)", sender: self)
                         }
                     }
-                    
-                    print("Before: self.searchresults: \(self.searchResults)")
                     if data != nil{
-                        print("number of results before parsing data: \(self.searchResults.count)")
                         let newResults = self.parseFromData(data!)
-                        print("number of newResults from parser: \(newResults.count)")
-                        print("number of results after parsing data: \(self.searchResults.count)")
                         self.searchResults.appendContentsOf(newResults)
-                        print("Adding newResults and self.searchresults into searchresults creates an array with count: \(self.searchResults.count)")
                         
                         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                            self.delegate?.googlePlacesSearchResult(newResults, error: nil, sender: self)})
+                        self.delegate?.googlePlacesSearchResult(newResults, error: nil, sender: self)})
                     }
                     
                     print("After: self.searchresults: \(self.searchResults)")
