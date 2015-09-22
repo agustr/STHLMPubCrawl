@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A6CA0911BB012ED0062AD2C /* GPPlacePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		8A6CA0951BB129A90062AD2C /* beer-glass-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A6CA0941BB129A90062AD2C /* beer-glass-20.png */; settings = {ASSET_TAGS = (); }; };
 		8A9156621BAF04FC00839503 /* STHLMPubCrawlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156611BAF04FC00839503 /* STHLMPubCrawlTests.swift */; };
 		8A91566D1BAF04FC00839503 /* STHLMPubCrawlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91566C1BAF04FC00839503 /* STHLMPubCrawlUITests.swift */; };
 		8A91568D1BAF056600839503 /* GPPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567B1BAF056600839503 /* GPPhoto.swift */; settings = {ASSET_TAGS = (); }; };
@@ -22,9 +24,7 @@
 		8A9156981BAF056600839503 /* GPPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156871BAF056600839503 /* GPPlace.swift */; settings = {ASSET_TAGS = (); }; };
 		8A9156991BAF056600839503 /* UILabelPadded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156881BAF056600839503 /* UILabelPadded.swift */; settings = {ASSET_TAGS = (); }; };
 		8A91569A1BAF056600839503 /* place.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156891BAF056600839503 /* place.txt */; settings = {ASSET_TAGS = (); }; };
-		8A91569B1BAF056600839503 /* beer-glass-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A91568A1BAF056600839503 /* beer-glass-20.png */; settings = {ASSET_TAGS = (); }; };
 		8A91569C1BAF056600839503 /* beer-glass-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A91568B1BAF056600839503 /* beer-glass-40.png */; settings = {ASSET_TAGS = (); }; };
-		8A91569D1BAF056600839503 /* beer-glass-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A91568C1BAF056600839503 /* beer-glass-256.png */; settings = {ASSET_TAGS = (); }; };
 		8A9156A01BAF05F300839503 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569E1BAF05F300839503 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		8A9156A11BAF05F300839503 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569F1BAF05F300839503 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
 		8A9A4D741BAF488000376F2D /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8A9A4D731BAF488000376F2D /* beep.wav */; settings = {ASSET_TAGS = (); }; };
@@ -50,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		8A3137181BAF2DC6000CBACE /* STHLMPubCrawl-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STHLMPubCrawl-Bridging-Header.h"; sourceTree = "<group>"; };
+		8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPPlacePageViewController.swift; sourceTree = "<group>"; };
+		8A6CA0941BB129A90062AD2C /* beer-glass-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-glass-20.png"; sourceTree = "<group>"; };
 		8A9156491BAF04FC00839503 /* STHLMPubCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STHLMPubCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A91565D1BAF04FC00839503 /* STHLMPubCrawlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STHLMPubCrawlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9156611BAF04FC00839503 /* STHLMPubCrawlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STHLMPubCrawlTests.swift; sourceTree = "<group>"; };
@@ -70,7 +72,6 @@
 		8A9156871BAF056600839503 /* GPPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPPlace.swift; sourceTree = "<group>"; };
 		8A9156881BAF056600839503 /* UILabelPadded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelPadded.swift; sourceTree = "<group>"; };
 		8A9156891BAF056600839503 /* place.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = place.txt; sourceTree = "<group>"; };
-		8A91568A1BAF056600839503 /* beer-glass-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-glass-20.png"; sourceTree = "<group>"; };
 		8A91568B1BAF056600839503 /* beer-glass-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-glass-40.png"; sourceTree = "<group>"; };
 		8A91568C1BAF056600839503 /* beer-glass-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-glass-256.png"; sourceTree = "<group>"; };
 		8A91569E1BAF05F300839503 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -134,20 +135,21 @@
 				8A91567B1BAF056600839503 /* GPPhoto.swift */,
 				8A91567F1BAF056600839503 /* GPPlaceViewController.swift */,
 				8A9156801BAF056600839503 /* InitialViewController.swift */,
+				8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */,
+				8A91569E1BAF05F300839503 /* Main.storyboard */,
 				8A9156811BAF056600839503 /* Info.plist */,
 				8A9156821BAF056600839503 /* AppDelegate.swift */,
 				8A9156831BAF056600839503 /* Beeper.swift */,
 				8A9156841BAF056600839503 /* Utilities.swift */,
 				8AA13CA21BAF472E00AA02B1 /* Sounds.xcassets */,
 				8A91567D1BAF056600839503 /* Images.xcassets */,
-				8A9156881BAF056600839503 /* UILabelPadded.swift */,
-				8A9156891BAF056600839503 /* place.txt */,
-				8A91569E1BAF05F300839503 /* Main.storyboard */,
-				8A91569F1BAF05F300839503 /* LaunchScreen.xib */,
-				8A3137181BAF2DC6000CBACE /* STHLMPubCrawl-Bridging-Header.h */,
-				8A91568A1BAF056600839503 /* beer-glass-20.png */,
 				8A91568B1BAF056600839503 /* beer-glass-40.png */,
 				8A91568C1BAF056600839503 /* beer-glass-256.png */,
+				8A6CA0941BB129A90062AD2C /* beer-glass-20.png */,
+				8A9156881BAF056600839503 /* UILabelPadded.swift */,
+				8A9156891BAF056600839503 /* place.txt */,
+				8A91569F1BAF05F300839503 /* LaunchScreen.xib */,
+				8A3137181BAF2DC6000CBACE /* STHLMPubCrawl-Bridging-Header.h */,
 			);
 			path = STHLMPubCrawl;
 			sourceTree = "<group>";
@@ -275,13 +277,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A9A4D741BAF488000376F2D /* beep.wav in Resources */,
-				8A91569B1BAF056600839503 /* beer-glass-20.png in Resources */,
 				8AA13CA31BAF472E00AA02B1 /* Sounds.xcassets in Resources */,
+				8A6CA0951BB129A90062AD2C /* beer-glass-20.png in Resources */,
 				8A91569A1BAF056600839503 /* place.txt in Resources */,
 				8A91569C1BAF056600839503 /* beer-glass-40.png in Resources */,
 				8A9156A01BAF05F300839503 /* Main.storyboard in Resources */,
 				8A9156921BAF056600839503 /* Info.plist in Resources */,
-				8A91569D1BAF056600839503 /* beer-glass-256.png in Resources */,
 				8A9156A11BAF05F300839503 /* LaunchScreen.xib in Resources */,
 				8A91568E1BAF056600839503 /* Images.xcassets in Resources */,
 			);
@@ -315,6 +316,7 @@
 				8A91568F1BAF056600839503 /* GPSearchRadar.swift in Sources */,
 				8A9156931BAF056600839503 /* AppDelegate.swift in Sources */,
 				8A9156991BAF056600839503 /* UILabelPadded.swift in Sources */,
+				8A6CA0911BB012ED0062AD2C /* GPPlacePageViewController.swift in Sources */,
 				8A9156941BAF056600839503 /* Beeper.swift in Sources */,
 				8A9156911BAF056600839503 /* InitialViewController.swift in Sources */,
 				8A9156971BAF056600839503 /* GPPlacesSearchQuery.swift in Sources */,

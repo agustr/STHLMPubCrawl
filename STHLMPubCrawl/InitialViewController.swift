@@ -37,13 +37,61 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         map.showAnnotations(map.annotations, animated: true)
 
         
-        // let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as? GPPlaceViewController
+        if vc != nil{
+            
+            vc?.view.layer.borderWidth = 4
+            vc?.view.layer.borderColor = UIColor.redColor().CGColor
+            
+            self.GPPlaceView.layer.borderColor = UIColor.yellowColor().CGColor
+            self.GPPlaceView.layer.borderWidth = 2
+            
+            self.GPPlaceView.addSubview(vc!.view)
+//            self.GPPlaceView.clipsToBounds = true
+            print("current autoresizing mask: \(vc?.view.autoresizingMask))" )
+            print("translate audto resizing mask\(vc?.view.translatesAutoresizingMaskIntoConstraints)")
+            
+//            self.GPPlaceView.addConstraint( NSLayoutConstraint(item: vc!,attribute: NSLayoutAttribute.Bottom,relatedBy: NSLayoutRelation.Equal,toItem: self.GPPlaceView,attribute: NSLayoutAttribute.Bottom,multiplier:nil,constant: nil))
+            
+            print("the frame of the pageing viewcontroller is: \(vc!.view.frame)")
+
+            //vc!.view.bounds.size = self.GPPlaceView.bounds.size
+            vc?.view.frame.size =  self.GPPlaceView.bounds.size
+            
+
+//            vc?.view.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+
+            
+            print("Paging view controller frame : \(vc!.view.frame)")
+            print("Paging view controller bounds : \(vc!.view.bounds)")
+            
+            //self.GPPlaceView.bounds.size = CGSizeMake(self.GPPlaceView.bounds.size.height * 1.5, self.GPPlaceView.bounds.size.width)
+            //self.GPPlaceView.bringSubviewToFront(vc!.view)
+        }
+        else {
+            print("could not load GPPlacePageViewController from storyboard")
+        }
+        
+//        self.GPPlaceView.autoresizesSubviews = true
+        
+        //self.GPPlaceView.bounds.size = CGSizeMake(self.GPPlaceView.bounds.size.height * 1.5, self.GPPlaceView.bounds.size.width)
         
         
-        self.GPPlaceView.clipsToBounds = true
+       
+        //self.gpbarviewcontroller = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as! GPPlaceViewController
+        
+        //self.GPPlaceView.addSubview(self.gpbarviewcontroller.view)
+        
+        //self.GPPlaceView.clipsToBounds = true
         //self.gpbarviewcontroller.view.frame.size = self.GPPlaceView.frame.size
         
-        self.GPPlaceView.bounds.size = CGSizeMake(self.GPPlaceView.bounds.size.height * 1.5, self.GPPlaceView.bounds.size.width)
+        //self.GPPlaceView.bounds.size = CGSizeMake(self.GPPlaceView.bounds.size.height * 1.5, self.GPPlaceView.bounds.size.width)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.GPPlaceView.layoutSubviews()
     }
     
     func newSonarResultsAvailable(){
@@ -117,7 +165,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
                 dispatch_after(delayTime, dispatch_get_main_queue()) {
                     self.map.addAnnotation(mItem as MKAnnotation)
                     self.map.showAnnotations(self.map.annotations, animated: false)
-                    print("added annotation the count is now : \(self.map.annotations.count)")
+                   // print("added annotation the count is now : \(self.map.annotations.count)")
                 }
             }
         });

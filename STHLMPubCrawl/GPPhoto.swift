@@ -27,6 +27,15 @@ class GPPhoto: NSObject {
         return -1
     }
     
+    var size:CGSize{
+        get{
+            if (self.width<0) || (self.height<0){
+                return CGSize(width: 0, height: 0)
+            }
+            return CGSize(width: self.width,height: self.height)
+        }
+    }
+    
     var aspectRatio:Double{
         return Double(self.width)/Double(self.height)
     }

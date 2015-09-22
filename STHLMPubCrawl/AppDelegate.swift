@@ -19,16 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        //GMSServices.provideAPIKey(googleMapsApiKey)
-        //let searchRadar = GPSearchRadar.sharedInstance
-        //searchRadar.distanceFilter = 10
         
-        //searchRadar.searchQuery = GPPlacesSearchQuery (key: nil, rankByDistance: true, keyword: nil, language: nil, minPrice: nil, maxPrice: nil, name: nil, openNow: nil, types: [kGPTypeBar, kGPTypeNightClub])
+        // do some task
         GPSearchRadar.sharedInstance
         let gpQuery = GPPlacesSearchQuery (key: nil, rankByDistance: true, keyword: nil, language: nil, minPrice: nil, maxPrice: nil, name: nil, openNow: nil, types: [kGPTypeBar, kGPTypeNightClub])
         if gpQuery != nil{
             GPSearchRadar.sharedInstance.searchQuery = gpQuery
         }
+        
         return true
     }
 

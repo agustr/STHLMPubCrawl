@@ -255,7 +255,7 @@ class GPPlacesSearchQuery{
         for result in results! {
             let place = GPPlace(dict: result)
             
-            place?.describe()
+            //place?.describe()
             if (place != nil) {
                 mapItems.append(place!)
             }
@@ -300,7 +300,7 @@ class GPPlacesSearchQuery{
                         self.delegate?.googlePlacesSearchResult(newResults, error: nil, sender: self)})
                     }
                     
-                    print("After: self.searchresults: \(self.searchResults)")
+                    print("After: self.searchresults: \(self.searchResults.count)")
                 }).resume()
             }
         }

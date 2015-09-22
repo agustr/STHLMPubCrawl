@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="No3-x1-15x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -32,24 +32,32 @@
                                     <action selector="showAnnotations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gAk-Nh-3EG"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uR0-f2-5RM">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="uR0-f2-5RM">
                                 <rect key="frame" x="4" y="300" width="592" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WqX-CQ-DWl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="1NE-eo-cMI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uR0-f2-5RM" secondAttribute="trailing" constant="-16" id="BEW-d9-zty"/>
-                            <constraint firstItem="uR0-f2-5RM" firstAttribute="height" secondItem="zhc-WD-iO3" secondAttribute="height" id="BlN-Y4-Rxk"/>
+                            <constraint firstItem="uR0-f2-5RM" firstAttribute="top" secondItem="zhc-WD-iO3" secondAttribute="bottom" id="6Re-Hn-PDm"/>
+                            <constraint firstItem="uR0-f2-5RM" firstAttribute="leading" secondItem="zhc-WD-iO3" secondAttribute="trailing" constant="-592" id="6Rp-Ia-NPa"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uR0-f2-5RM" secondAttribute="bottom" id="74I-BE-CZl"/>
+                            <constraint firstItem="uR0-f2-5RM" firstAttribute="leading" secondItem="zhc-WD-iO3" secondAttribute="trailing" constant="-592" id="B1d-PP-8BJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uR0-f2-5RM" secondAttribute="trailing" constant="-16" id="Hwn-J4-fyW"/>
                             <constraint firstItem="WqX-CQ-DWl" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Oeb-SA-DXk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zhc-WD-iO3" secondAttribute="trailing" constant="-16" id="RYb-p8-kIa"/>
-                            <constraint firstItem="uR0-f2-5RM" firstAttribute="width" secondItem="zhc-WD-iO3" secondAttribute="width" id="Ugh-1Q-Elu"/>
-                            <constraint firstItem="uR0-f2-5RM" firstAttribute="top" secondItem="zhc-WD-iO3" secondAttribute="bottom" id="UkJ-SU-vnR"/>
+                            <constraint firstItem="zhc-WD-iO3" firstAttribute="height" secondItem="uR0-f2-5RM" secondAttribute="height" id="fbh-UO-6yK"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="iSb-gi-gdi"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uR0-f2-5RM" secondAttribute="bottom" id="r8X-9A-Ncd"/>
+                            <constraint firstItem="uR0-f2-5RM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="pvL-S2-ohD"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="sXf-Gs-O8B"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6Rp-Ia-NPa"/>
+                                <exclude reference="B1d-PP-8BJ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="GPPlaceView" destination="uR0-f2-5RM" id="7a0-rc-yIB"/>
@@ -60,13 +68,13 @@
             </objects>
             <point key="canvasLocation" x="491" y="177"/>
         </scene>
-        <!--Bars Page View Controller-->
+        <!--Place Page View Controller-->
         <scene sceneID="fNc-1C-36A">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="No3-x1-15x" customClass="BarsPageViewController" customModule="STHLMPubCrawl" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="GPPlacePageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="No3-x1-15x" customClass="GPPlacePageViewController" customModule="STHLMPubCrawl" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIR-WF-hOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1681" y="-736"/>
+            <point key="canvasLocation" x="1569" y="-733"/>
         </scene>
         <!--Place View Controller-->
         <scene sceneID="ec3-Zx-40n">
@@ -80,10 +88,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steamPunkBar" translatesAutoresizingMaskIntoConstraints="NO" id="b44-Sp-VqV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="steamPunkBar" translatesAutoresizingMaskIntoConstraints="NO" id="b44-Sp-VqV">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw1-uq-Vn2" userLabel="Barname" customClass="UILabelPadded" customModule="STHLMPubCrawl" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw1-uq-Vn2" userLabel="Barname" customClass="UILabelPadded" customModule="STHLMPubCrawl" customModuleProvider="target">
                                 <rect key="frame" x="20" y="8" width="560" height="20.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -101,7 +109,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9T-oO-7UI" userLabel="TypeOfPlace" customClass="UILabelPadded" customModule="STHLMPubCrawl" customModuleProvider="target">
-                                <rect key="frame" x="555" y="28" width="24.5" height="12"/>
+                                <rect key="frame" x="579.5" y="28" width="0.0" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="IAb-FP-jx1"/>
@@ -172,7 +180,6 @@
                             </mask>
                         </variation>
                     </view>
-                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="barImageView" destination="b44-Sp-VqV" id="efV-as-0aF"/>
                         <outlet property="labelPlaceName" destination="mw1-uq-Vn2" id="y9l-lW-0wq"/>

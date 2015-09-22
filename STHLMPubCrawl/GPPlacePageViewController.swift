@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class BarsPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     var places:[GPPlace]?
 
@@ -17,7 +17,7 @@ class BarsPageViewController: UIPageViewController, UIPageViewControllerDataSour
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print("setting up listener for \(kGPSearchRadarNewResultsNotifier)")
+        print("setting up GPPlacePageViewController's listener for: \(kGPSearchRadarNewResultsNotifier)")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSonarResultsAvailable", name: "kGPSearchRadarNewResultsNotifier", object: nil)
         self.delegate = self
         self.dataSource = self
@@ -113,9 +113,6 @@ class BarsPageViewController: UIPageViewController, UIPageViewControllerDataSour
             }
         }
     }
-    
-    
-
 
     /*
     // MARK: - Navigation

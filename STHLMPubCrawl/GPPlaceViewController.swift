@@ -29,6 +29,7 @@ class GPPlaceViewController: UIViewController {
         self.view.layer.masksToBounds = true
         self.place?.describe()
         self.updateUI()
+        self.barImageView.image = UIImage(named: "nonobarimage")
     }
     
     func updateUI(){
@@ -46,10 +47,13 @@ class GPPlaceViewController: UIViewController {
     
     func showPhoto(){
         if self.place != nil {
-            if self.place!.photos.count > 0 {
+            let photo = self.place?.photos.first
+            if photo != nil{
                 let queue = dispatch_queue_create("ble", nil)
                 dispatch_async(queue, { () -> Void in
-                    let barImage = self.place?.photos[0].getImageFromWeb(nil ,maxHeight: 1000)
+                    let maxHeigt = Int(CGFloat(photo!.height) * (self.maxPhotoResizeFactor(photo!.size, containerSize: self.barImageView.frame.size)))
+                    print("the max heigt is : \(maxHeigt)")
+                    let barImage = photo!.getImageFromWeb(nil ,maxHeight: maxHeigt)
                     dispatch_async(dispatch_get_main_queue()) {
                         if barImage != nil{
                             self.barImageView.image = barImage
@@ -58,6 +62,16 @@ class GPPlaceViewController: UIViewController {
                 })
             }
         }
+    }
+    
+    /// Returns the resize factor needed to make the photo be able to fill the container 
+    /// both horizontally and vertically. (the container is assumed to use resize to fill)
+    func maxPhotoResizeFactor(photoSize:CGSize!, containerSize: CGSize!)->CGFloat{
+        let widthToWidthFactor = (containerSize.width / photoSize.width)
+        let heigtToHeigtFactor = (containerSize.height /  photoSize.height)
+        let WidthToHeightFactor = (containerSize.width / photoSize.height)
+        let HeigthToWidthFactor = (containerSize.height / photoSize.width)
+        return max(max(widthToWidthFactor, heigtToHeigtFactor), max(WidthToHeightFactor,HeigthToWidthFactor))
     }
     
     func showTypes(){

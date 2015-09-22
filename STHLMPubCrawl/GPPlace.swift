@@ -140,6 +140,6 @@ class GPPlace:NSObject, MKAnnotation {
     }
     
     func describe(){
-        print("\n\(self.name)")
+        print("\(self.name)")
     }
 }
