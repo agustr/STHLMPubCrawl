@@ -17,6 +17,7 @@ class GPPlaceViewController: UIViewController {
         }
     }
     
+    @IBOutlet var redX: UIImageView!
     @IBOutlet var typesLabel: UILabel!
     @IBOutlet var labelPlaceName: UILabel!
     @IBOutlet var barImageView: UIImageView!
@@ -35,6 +36,7 @@ class GPPlaceViewController: UIViewController {
     func updateUI(){
         if self.labelPlaceName != nil{
             self.labelPlaceName.text = place?.name
+            //self.labelPlaceName.text = "stuffit"
             self.showTypes()
             
             let time = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
@@ -57,9 +59,14 @@ class GPPlaceViewController: UIViewController {
                     dispatch_async(dispatch_get_main_queue()) {
                         if barImage != nil{
                             self.barImageView.image = barImage
+                        }else{
+                            self.redX.hidden = false
                         }
                     }
                 })
+            }
+            else{
+                self.redX.hidden = false
             }
         }
     }
@@ -91,8 +98,6 @@ class GPPlaceViewController: UIViewController {
             }
             types = types.stringByReplacingOccurrencesOfString("meal_", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             types = types.stringByReplacingOccurrencesOfString("_", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            //types = types.stringByReplacingOccurrencesOfString("\nestablishment", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            //types = types.stringByReplacingOccurrencesOfString("\nestablishment", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             
             self.typesLabel.numberOfLines = 0 //self.place!.types.count
             self.typesLabel.text = types
@@ -112,7 +117,6 @@ class GPPlaceViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        print("ble ble ble3")
         self.place?.getDetails(false)
     }
     

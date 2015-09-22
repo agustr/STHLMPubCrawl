@@ -68,7 +68,9 @@ class GPPhoto: NSObject {
         let requestURL = self.getImageRequestUrl(maxWidth, maxHeight: maxHeight)
         
         if requestURL != nil{
+            print("trying to fech image")
             let imageData = NSData(contentsOfURL: requestURL!)
+            print("finished fetching image")
             if imageData != nil{
                 let imageBar = UIImage(data: imageData!)
                 return imageBar
