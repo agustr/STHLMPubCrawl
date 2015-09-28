@@ -191,8 +191,10 @@ class GPPlacesSearchQuery{
             
     }
     
-
-    
+    /// SearchWith location is the heart of this class.
+    /// Call this function with a location to get the results for that 
+    /// location. The location of the query changes when this is called.
+    /// Old results are deleted since they are automatically invalid for a new location.
     func searchWith( location : CLLocationCoordinate2D ) {
             self.search(location) { (items, errorDescription) -> Void in
                 if self.delegate != nil {
@@ -204,14 +206,12 @@ class GPPlacesSearchQuery{
             
     }
     
-    
+    /// Creates an url with the appropriate query.
     private func createQueryUrl()->NSURL?{
         
         var urlString = "\(URL)\(LOCATION)\(self.searchLocation!.latitude),\(self.searchLocation!.longitude)&key=\(self.key)"
         
-        print("self.rankbydistance: \(self.rankByDistance)")
         urlString = self.addRankBy(urlString, rankByDistance: self.rankByDistance)
-        print("this is the value of name here:\(self.name)")
         urlString = self.addNameToUrl(urlString, name: self.name)
         urlString = self.addTypesToUrl(urlString, types: self.types)
         urlString = self.addLanguageToUrl(urlString, lang: self.language)
@@ -234,15 +234,12 @@ class GPPlacesSearchQuery{
     // ------------------------------------------------------------------------------------------
     // Parse JSON into array of MKMapItem
     // ------------------------------------------------------------------------------------------
-
+    /// Takes a json data response and returns an array containing the GPPlace's that the response produced.
+    /// Always returns an array if no places were found the array is empty.
     private func parseFromData(data : NSData) -> [GPPlace] {
         print("parsing json")
         var mapItems:[GPPlace]=[]
-        
         let json = (try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)) as? NSDictionary
-        //NSLog("response from google search is: %@", json!)
-
-        
         let results = json?["results"] as? Array<NSDictionary>
         
         if let token = json?["next_page_token"] as? String{
@@ -254,19 +251,18 @@ class GPPlacesSearchQuery{
 
         for result in results! {
             let place = GPPlace(dict: result)
-            
-            //place?.describe()
             if (place != nil) {
                 mapItems.append(place!)
             }
         }        
         return mapItems
     }
-    
+
+    /// pagetoken — Returns the next 20 results from a previously run search.
+    /// Setting a pagetoken parameter will execute a search with the same
+    /// parameters used previously — all parameters other than pagetoken will be ignored.
     func getNextTwentyResults(){
-        //        pagetoken — Returns the next 20 results from a previously run search.
-        //        Setting a pagetoken parameter will execute a search with the same
-        //        parameters used previously — all parameters other than pagetoken will be ignored.
+
         print("getNextTwentyResults now the \(self.searchResults.count)")
         if (self.lastReceivedPageToken != nil){
             var urlString:String? = "\(URL)key=\(self.key)&pagetoken=\(self.lastReceivedPageToken!)"
@@ -306,40 +302,35 @@ class GPPlacesSearchQuery{
         }
         
     }
-    
+
+    /// zagatselected — Add this parameter (just the parameter name, with
+    /// no associated value) to restrict your search to locations that are
+    /// Zagat selected businesses. This parameter must not include
+    /// a true or false value. The zagatselected parameter is experimental,
+    /// and is only available to Google Places API for Work customers.
+    //
+    /// Maps API for Work customers should not include a client or signature
+    /// parameter with their requests.
     private func addZagatSelected(url:String)->String{
-        
-        //        zagatselected — Add this parameter (just the parameter name, with
-        //        no associated value) to restrict your search to locations that are
-        //        Zagat selected businesses. This parameter must not include
-        //        a true or false value. The zagatselected parameter is experimental,
-        //        and is only available to Google Places API for Work customers.
-        //
-        //        Maps API for Work customers should not include a client or signature
-        //        parameter with their requests.
-        
         return url
     }
     
+    /// keyword — A term to be matched against all content that Google
+    /// has indexed for this place, including but not limited to name,
+    /// type, and address, as well as customer reviews and other third-party content.
     private func addKeyword(url:String, keyword:String?)->String{
-        //        keyword — A term to be matched against all content that Google
-        //        has indexed for this place, including but not limited to name,
-        //        type, and address, as well as customer reviews and other third-party content.
-        
         return url
-        
     }
-    
+
+    /// rankby — Specifies the order in which results are listed. Possible values are:
+    ///
+    /// prominence (default). This option sorts results based on their importance. Ranking
+    /// will favor prominent places within the specified area. Prominence can be
+    /// affected by a place's ranking in Google's index, global popularity, and other factors.
+    ///
+    /// distance. This option sorts results in ascending order by their distance from the
+    /// specified location. When distance is specified, one or more of keyword, name, or types is required.
     private func addRankBy(url:String, rankByDistance:Bool?)->String{
-        //        rankby — Specifies the order in which results are listed. Possible values are:
-        //
-        //        prominence (default). This option sorts results based on their importance. Ranking
-        //        will favor prominent places within the specified area. Prominence can be
-        //        affected by a place's ranking in Google's index, global popularity, and other factors.
-        //
-        //        distance. This option sorts results in ascending order by their distance from the
-        //        specified location. When distance is specified, one or more of keyword, name, or types is required.
-        
         var urlString = url
         if (rankByDistance==true) {
             urlString = "\(urlString)&rankby=distance"
@@ -349,11 +340,12 @@ class GPPlacesSearchQuery{
         return urlString
     }
     
+    /// opennow — Returns only those places that are open for business at the
+    /// time the query is sent. Places that do not specify opening hours in
+    /// the Google Places database will not be returned if you include this
+    /// parameter in your query.
     private func addOpenNow(url:String, isOpen:Bool?)->String{
-        //        opennow — Returns only those places that are open for business at the
-        //        time the query is sent. Places that do not specify opening hours in
-        //        the Google Places database will not be returned if you include this
-        //        parameter in your query.
+
         var urlString = url
         
         if (isOpen == true){
@@ -362,11 +354,11 @@ class GPPlacesSearchQuery{
         
         return urlString
     }
-    
+
+    /// minprice and maxprice (optional) — Restricts results to only those places
+    /// within the specified range. Valid values range between 0 (most affordable) to 4 (most expensive),
+    /// inclusive. The exact amount indicated by a specific value will vary from region to region.
     private func addMinMaxPrice(url:String, minPrice:Int?, maxPrice:Int?)->String{
-        //        minprice and maxprice (optional) — Restricts results to only those places
-        //        within the specified range. Valid values range between 0 (most affordable) to 4 (most expensive),
-        //        inclusive. The exact amount indicated by a specific value will vary from region to region.
         var urlString = url
         if ((minPrice <= 4) && (minPrice != nil)){
             urlString = "\(urlString)&minprice=\(minPrice)"
@@ -377,25 +369,26 @@ class GPPlacesSearchQuery{
         return url
     }
     
+    /// language — The language code, indicating in which language the results
+    /// should be returned, if possible. See the list of supported languages
+    /// and their codes: https://developers.google.com/maps/faq#languagesupport
+    /// Note that we often update supported languages so this list may not be exhaustive.
     private func addLanguageToUrl(url:String, lang:String?)->String{
-        //        language — The language code, indicating in which language the results
-        //        should be returned, if possible. See the list of supported languages
-        //        and their codes: https://developers.google.com/maps/faq#languagesupport
-        //        Note that we often update supported languages so this list may not be exhaustive.
-        //MARK: LSKDJFLSDJF
-        //TODO: Implementation of language feature is not ready
-        //FIXME: Implement the addition of the language feature
+
+
+        /// TODO: Implementation of language feature is not ready
+        /// FIXME: Implement the addition of the language feature
         return url
     }
     
+    /// name — One or more terms to be matched against the names of places,
+    /// separated with a space character. Results will be restricted to those
+    /// containing the passed name values. Note that a place may have
+    /// additional names associated with it, beyond its listed name. The API
+    /// will try to match the passed name value against all of these names.
+    /// As a result, places may be returned in the results whose listed names do
+    /// not match the search term, but whose associated names do.
     private func addNameToUrl(url:String, name:String?)->String{
-        //        name — One or more terms to be matched against the names of places,
-        //        separated with a space character. Results will be restricted to those
-        //        containing the passed name values. Note that a place may have
-        //        additional names associated with it, beyond its listed name. The API
-        //        will try to match the passed name value against all of these names.
-        //        As a result, places may be returned in the results whose listed names do
-        //        not match the search term, but whose associated names do.
         
         if let name = name as String! {
             if !name.isEmpty{
@@ -413,12 +406,12 @@ class GPPlacesSearchQuery{
         return url
     }
     
+    /// types — Restricts the results to places matching at least one
+    /// of the specified types. Types should be separated with a pipe symbol
+    /// (type1|type2|etc). See the list of supported types:
+    /// https://developers.google.com/maps/documentation/places/supported_types
     private func addTypesToUrl(url:String, types:[String]?)->String{
-        //        types — Restricts the results to places matching at least one
-        //        of the specified types. Types should be separated with a pipe symbol
-        //        (type1|type2|etc). See the list of supported types:
-        //        https://developers.google.com/maps/documentation/places/supported_types
-        
+
         if types == nil{
             return url
         }
@@ -435,65 +428,12 @@ class GPPlacesSearchQuery{
             else{
                 newUrl = "\(newUrl)|\(type)"
             }
-            //newUrl = newUrl.URLByAppendingPathComponent(type)
             
             print("\(type)")
         }
         
         return newUrl
     }
-    
-//    class GPPlace:NSObject {
-//        var dictionary:NSDictionary = NSDictionary()
-//        var latitude:Double = 0
-//        var longitude:Double = 0
-//        var name:String = ""
-//        var types:[String] = ["no type"]
-//        var vicinity:String? = ""
-//        
-//        init?(dict:NSDictionary){
-//            
-//            dictionary = dict
-//
-//            if let geometry = dict["geometry"] as? NSDictionary{
-//                if let location = geometry["location"] as? NSDictionary{
-//                    if let lat = location["lat"] as? Double{
-//                        latitude = lat
-//                    }
-//                    
-//                    if let lng = location["lng"] as? Double{
-//                        longitude = lng
-//                    }
-//                }
-//            }
-//            
-//            if let vicin = dict["vicinity"] as? String{
-//                vicinity = vicin
-//            }
-//            
-//            if let nom = dict["name"] as? String{
-//                name = nom
-//            }else{
-//                name = ""
-//            }
-//            
-//            super.init()
-//            
-//            if let typ = dict["types"] as? [String]{
-//                types = typ
-//            }else{
-//                return nil
-//            }
-//
-//            if (name=="")||( (latitude==0)&&(longitude==0) ){
-//                return nil
-//            }
-//        }
-//        
-//        func describe(){
-//            println("GPPlace:\n     \(name)\n     location:\(latitude),\(longitude)\n     types:\(types)")
-//        }
-//    }
 }
 
 
