@@ -43,8 +43,6 @@ class GPPhoto: NSObject {
     func getImageRequestUrl(maxWidth:Int?, maxHeight:Int?)->NSURL?{
         var urlStr:String! = "https://maps.googleapis.com/maps/api/place/photo?"
         
-        print("")
-        
         if maxWidth != nil{
             urlStr = urlStr + "maxwidth=\(maxWidth!)&"
         }
@@ -66,7 +64,7 @@ class GPPhoto: NSObject {
     func getImageFromWeb(maxWidth: Int?, maxHeight:Int?) -> UIImage? {
         
         let requestURL = self.getImageRequestUrl(maxWidth, maxHeight: maxHeight)
-        
+        print("the photo request is: \(requestURL)")
         if requestURL != nil{
             print("trying to fech image")
             let imageData = NSData(contentsOfURL: requestURL!)
@@ -77,5 +75,21 @@ class GPPhoto: NSObject {
             }
         }
         return nil
+    }
+    
+    func getImageThatFitsContainerOfSize(size:CGSize){
+    
+    }
+    
+    func getImageThatFillsContainerOfSize(size:CGSize){
+    
+    }
+    
+    func maxPhotoResizeFactor(photoSize:CGSize!, containerSize: CGSize!)->CGFloat{
+        let widthToWidthFactor = (containerSize.width / photoSize.width)
+        let heigtToHeigtFactor = (containerSize.height /  photoSize.height)
+        let WidthToHeightFactor = (containerSize.width / photoSize.height)
+        let HeigthToWidthFactor = (containerSize.height / photoSize.width)
+        return max(max(widthToWidthFactor, heigtToHeigtFactor), max(WidthToHeightFactor,HeigthToWidthFactor))
     }
 }
