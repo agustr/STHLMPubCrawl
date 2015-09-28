@@ -17,12 +17,37 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print("setting up GPPlacePageViewController's listener for: \(kGPSearchRadarNewResultsNotifier)")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSonarResultsAvailable", name: "kGPSearchRadarNewResultsNotifier", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSonarResultsAvailable", name: kGPSearchRadarNewResultsNotifier, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSelectedPlace", name: kGPSearchRadarNewSelectedPlaceNotifier, object: nil)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextPresentedViewController = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as! GPPlaceViewController
+        self.setViewControllers([nextPresentedViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+
         self.delegate = self
         self.dataSource = self
     }
+    
+    deinit{
+        // remove self as observer from nsnotificationcenter
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func newSelectedPlace(){
+        if let currentPlaceVC = self.viewControllers?.first as? GPPlaceViewController{
+            if currentPlaceVC.place != GPSearchRadar.sharedInstance.currentPlace{
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let nextPresentedViewController = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as! GPPlaceViewController
+                nextPresentedViewController.place = GPSearchRadar.sharedInstance.currentPlace
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.setViewControllers([nextPresentedViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+                }
+            }
+        }
 
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -52,6 +77,7 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
             self.setViewControllers([nextPresentedViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
         }
     }
+    
     
     ///
     func isPlace(Place:GPPlace, Places: [GPPlace])-> Int?{
@@ -108,8 +134,10 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
     
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if (finished) {
-            if let currentVC = previousViewControllers.first as? GPPlaceViewController{
-                GPSearchRadar.sharedInstance.currentPlace = currentVC.place
+            if let currentVC = self.viewControllers?.first as? GPPlaceViewController{
+                if !(currentVC.place == GPSearchRadar.sharedInstance.currentPlace){
+                    GPSearchRadar.sharedInstance.currentPlace = currentVC.place
+                }
             }
         }
     }
