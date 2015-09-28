@@ -13,8 +13,13 @@ import MapKit
 class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     
     static let sharedInstance = GPSearchRadar()
+    var places:[GPPlace]! = []
     
-    var currentPlace:GPPlace? = nil
+    var currentPlace:GPPlace? = nil{
+        didSet{
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kGPSearchRadarNewSelectedPlaceNotifier, object: self))
+        }
+    }
     
     // SearchRadar has a search query and a delta distance
     // the delta distance tells the radar after how many meters it shoudl update the query.
@@ -111,6 +116,7 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
             }
         }
         print("posting notification: \(kGPSearchRadarNewResultsNotifier)")
+        self.places = self.searchQuery?.searchResults
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "kGPSearchRadarNewResultsNotifier", object: self))
     }
     
@@ -135,3 +141,4 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
 }
 
 let kGPSearchRadarNewResultsNotifier = "kGPSearchRadarNewResultsNotifier"
+let kGPSearchRadarNewSelectedPlaceNotifier = "kGPSearchRadarNewSelectedPlaceNotifier"
