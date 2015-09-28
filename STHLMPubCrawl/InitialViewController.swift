@@ -14,51 +14,46 @@ import MapKit
 class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
 
     @IBOutlet var map: MKMapView!
-    @IBOutlet var GPPlaceView: UIView!
-//    
-//    lazy var locationManager:CLLocationManager = {
-//        print("initializing locationManager")
-//        var temoraryLocationManager = CLLocationManager()
-//        temoraryLocationManager.delegate = self
-//        return temoraryLocationManager
-//    }()
     
     var shouldCenter:Bool = true
+    var showSelectedPlaceOnly = true
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSonarResultsAvailable", name: kGPSearchRadarNewResultsNotifier, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSelectedPlace", name: kGPSearchRadarNewSelectedPlaceNotifier, object: nil)
         // Do any additional setup after loading the view, typically from a nib.
-        //var initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
         
         map.showsPointsOfInterest = false
         map.showsUserLocation = true
+        map.rotateEnabled = false
         map.showAnnotations(map.annotations, animated: true)
-
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as? GPPlaceViewController
-        if vc != nil{
-            
-            vc?.view.layer.borderWidth = 4
-            vc?.view.layer.borderColor = UIColor.redColor().CGColor
-            
-            self.GPPlaceView.layer.borderColor = UIColor.yellowColor().CGColor
-            self.GPPlaceView.layer.borderWidth = 2
-            
-            vc?.view.frame.size =  self.GPPlaceView.frame.size
-
-            self.GPPlaceView.addSubview(vc!.view)
+    }
+    
+    func newSelectedPlace(){
+        print("initial view controller got a new place selected call")
+        // find the annotation that
+        for annotation in map.annotations{
+            if let place = annotation as? GPPlace{
+                let annotationview = map.viewForAnnotation(place)
+                annotationview?.image = UIImage(named: "beer-glass-20-BW")
+            }
         }
-        else {
-            print("could not load GPPlacePageViewController from storyboard")
+        if let currentPlace = GPSearchRadar.sharedInstance.currentPlace as? MKAnnotation{
+            print("change the look of the annotation.")
+            let annotView = map.viewForAnnotation(currentPlace)
+            annotView?.superview?.bringSubviewToFront(annotView!)
+            annotView?.image = UIImage(named: "beer-glass-20")
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.GPPlaceView.layoutSubviews()
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("the segue name is: \(segue.identifier)")
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func newSonarResultsAvailable(){
@@ -73,7 +68,6 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet var button: UIButton!
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
             1000, 1000)
@@ -85,8 +79,15 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     }
     
 //-------------
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        print("selected annotation")
+        if let place = view.annotation as? GPPlace{
+            print("it was an gpplace annotation")
+            GPSearchRadar.sharedInstance.currentPlace = place
+        }
+    }
+    
     func mapView(_: MKMapView, didDeselectAnnotationView view: MKAnnotationView){
-    // deal with user selecting an annotation.
     
     }
     
@@ -101,7 +102,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         var view = mapView.dequeueReusableAnnotationViewWithIdentifier("bech")
         
         if view == nil {
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bech")
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: "bech")
             view!.canShowCallout = true
         } else {
             view!.annotation = annotation
@@ -111,8 +112,8 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         view!.rightCalloutAccessoryView = nil
         
         if (annotation as? GPPlace != nil) {
-            
-            view!.image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("beer-glass-20", ofType: "png")!)
+            let img = UIImage(named: "beer-glass-20-BW")
+            view!.image = img
         }
         return view
     }
