@@ -31,6 +31,7 @@ class GPPlaceViewController: UIViewController {
         self.place?.describe()
         self.updateUI()
         self.barImageView.image = UIImage(named: "nonobarimage")
+        self.redX.hidden = true
     }
     
     func updateUI(){
@@ -48,6 +49,7 @@ class GPPlaceViewController: UIViewController {
     }
     
     func showPhoto(){
+        print("show photo")
         if self.place != nil {
             let photo = self.place?.photos.first
             if photo != nil{
@@ -60,12 +62,15 @@ class GPPlaceViewController: UIViewController {
                         if barImage != nil{
                             self.barImageView.image = barImage
                         }else{
+                            print("no photo available online for this place")
                             self.redX.hidden = false
+
                         }
                     }
                 })
             }
             else{
+                print("no photo in the photo array for this place")
                 self.redX.hidden = false
             }
         }
