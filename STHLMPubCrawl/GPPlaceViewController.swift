@@ -17,7 +17,7 @@ class GPPlaceViewController: UIViewController {
         }
     }
     
-    @IBOutlet var redX: UIImageView!
+    @IBOutlet var labelNoPhoto: UILabel!
     @IBOutlet var typesLabel: UILabel!
     @IBOutlet var labelPlaceName: UILabel!
     @IBOutlet var barImageView: UIImageView!
@@ -28,10 +28,9 @@ class GPPlaceViewController: UIViewController {
         // Do any additional setup after loading the view.
         // get place from file:
         self.view.layer.masksToBounds = true
-        self.place?.describe()
         self.updateUI()
         self.barImageView.image = UIImage(named: "nonobarimage")
-        self.redX.hidden = true
+        self.labelNoPhoto.hidden = true
     }
     
     func updateUI(){
@@ -63,15 +62,14 @@ class GPPlaceViewController: UIViewController {
                             self.barImageView.image = barImage
                         }else{
                             print("no photo available online for this place")
-                            self.redX.hidden = false
-
+                            self.labelNoPhoto.hidden = false
                         }
                     }
                 })
             }
             else{
                 print("no photo in the photo array for this place")
-                self.redX.hidden = false
+                self.labelNoPhoto.hidden = false
             }
         }
     }
@@ -106,6 +104,9 @@ class GPPlaceViewController: UIViewController {
             
             self.typesLabel.numberOfLines = 0 //self.place!.types.count
             self.typesLabel.text = types
+        }
+        else{
+            self.typesLabel.text = nil
         }
     }
     
@@ -168,9 +169,7 @@ class GPPlaceViewController: UIViewController {
         }
         
         var results = dict["results"] as? Array<NSDictionary>
-        
         let tempdict = results![0]
-        
         self.place = GPPlace(dict: tempdict)
     }
     

@@ -29,6 +29,7 @@
 		8A9156A11BAF05F300839503 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569F1BAF05F300839503 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
 		8A9A4D741BAF488000376F2D /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8A9A4D731BAF488000376F2D /* beep.wav */; settings = {ASSET_TAGS = (); }; };
 		8AA13CA31BAF472E00AA02B1 /* Sounds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AA13CA21BAF472E00AA02B1 /* Sounds.xcassets */; settings = {ASSET_TAGS = (); }; };
+		8AA4E9D21BBD10D60047BF31 /* BarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4E9D11BBD10D60047BF31 /* BarAnnotationView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		8A91569F1BAF05F300839503 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		8A9A4D731BAF488000376F2D /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
 		8AA13CA21BAF472E00AA02B1 /* Sounds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sounds.xcassets; sourceTree = "<group>"; };
+		8AA4E9D11BBD10D60047BF31 /* BarAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				8A91567B1BAF056600839503 /* GPPhoto.swift */,
 				8A91567F1BAF056600839503 /* GPPlaceViewController.swift */,
 				8A9156801BAF056600839503 /* InitialViewController.swift */,
+				8AA4E9D11BBD10D60047BF31 /* BarAnnotationView.swift */,
 				8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */,
 				8A91569E1BAF05F300839503 /* Main.storyboard */,
 				8A9156811BAF056600839503 /* Info.plist */,
@@ -240,6 +243,7 @@
 				TargetAttributes = {
 					8A9156481BAF04FC00839503 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = BY8JMSGP7Z;
 					};
 					8A91565C1BAF04FC00839503 = {
 						CreatedOnToolsVersion = 7.0;
@@ -314,6 +318,7 @@
 				8A9156951BAF056600839503 /* Utilities.swift in Sources */,
 				8A9156981BAF056600839503 /* GPPlace.swift in Sources */,
 				8A91568F1BAF056600839503 /* GPSearchRadar.swift in Sources */,
+				8AA4E9D21BBD10D60047BF31 /* BarAnnotationView.swift in Sources */,
 				8A9156931BAF056600839503 /* AppDelegate.swift in Sources */,
 				8A9156991BAF056600839503 /* UILabelPadded.swift in Sources */,
 				8A6CA0911BB012ED0062AD2C /* GPPlacePageViewController.swift in Sources */,
@@ -443,6 +448,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = STHLMPubCrawl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agustr.STHLMPubCrawl;
@@ -457,6 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = STHLMPubCrawl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agustr.STHLMPubCrawl;

@@ -23,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // do some task
         GPSearchRadar.sharedInstance
         let gpQuery = GPPlacesSearchQuery (key: nil, rankByDistance: true, keyword: nil, language: nil, minPrice: nil, maxPrice: nil, name: nil, openNow: nil, types: [kGPTypeBar, kGPTypeNightClub])
+        
         if gpQuery != nil{
-            GPSearchRadar.sharedInstance.searchQuery = gpQuery
+            GPSearchRadar.sharedInstance.setQuery(gpQuery)
         }
         
         return true

@@ -22,7 +22,7 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nextPresentedViewController = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as! GPPlaceViewController
-        self.setViewControllers([nextPresentedViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+        self.setViewControllers([nextPresentedViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
 
         self.delegate = self
         self.dataSource = self
@@ -44,8 +44,6 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
                 }
             }
         }
-
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,7 +59,8 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
         let currentVC = self.viewControllers?.first as? GPPlaceViewController
         
         if currentVC?.place != nil {
-            let currentPlaceIndex = self.isPlace(currentVC!.place!, Places: GPSearchRadar.sharedInstance.searchQuery!.searchResults)
+//            let currentPlaceIndex = self.isPlace(currentVC!.place!, Places: GPSearchRadar.sharedInstance.searchQuery!.searchResults)
+            let currentPlaceIndex = self.isPlace(currentVC!.place!, Places: GPSearchRadar.sharedInstance.places)
             if currentPlaceIndex != nil{
                  nextPresentedViewController = self.getViewControllerFor(currentPlaceIndex!)
             }
@@ -70,11 +69,19 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             nextPresentedViewController = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as? GPPlaceViewController
             if nextPresentedViewController != nil{
-                nextPresentedViewController!.place = GPSearchRadar.sharedInstance.searchQuery?.searchResults.first
+//                nextPresentedViewController!.place = GPSearchRadar.sharedInstance.searchQuery?.searchResults.first
+                nextPresentedViewController!.place = GPSearchRadar.sharedInstance.places.first
             }
         }
+        
         if nextPresentedViewController != nil{
-            self.setViewControllers([nextPresentedViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+//            self.setViewControllers([nextPresentedViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+            self.setViewControllers([nextPresentedViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: false){ (completed) -> Void in
+                // setfocus if completed is true
+                if completed {
+                    GPSearchRadar.sharedInstance.currentPlace = nextPresentedViewController?.place
+                }
+            }
         }
     }
     
@@ -94,7 +101,8 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
         let currentIndex = self.indexOfCurrentPlace()
         if currentIndex != nil{
             let nextIndex = currentIndex! + 1
-            if ((0 <= nextIndex) && (nextIndex <= (GPSearchRadar.sharedInstance.searchQuery?.searchResults.count)!-1)){
+//            if ((0 <= nextIndex) && (nextIndex <= (GPSearchRadar.sharedInstance.searchQuery?.searchResults.count)!-1)){
+            if ((0 <= nextIndex) && (nextIndex <= (GPSearchRadar.sharedInstance.places.count)-1)){
                 return self.getViewControllerFor(nextIndex)
             }
         }
@@ -106,8 +114,9 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
         let currentIndex = self.indexOfCurrentPlace()
         if currentIndex != nil{
             let nextIndex = currentIndex! - 1
-            if ((0 <= nextIndex) && (nextIndex <= (GPSearchRadar.sharedInstance.searchQuery?.searchResults.count)!-1) ){
-                return self.getViewControllerFor(nextIndex)
+//            if ((0 <= nextIndex) && (nextIndex <= (GPSearchRadar.sharedInstance.searchQuery?.searchResults.count)!-1) ){
+            if ((0 <= nextIndex) && (nextIndex <= (GPSearchRadar.sharedInstance.places.count)-1) ){
+            return self.getViewControllerFor(nextIndex)
             }
         }
         return nil
@@ -116,7 +125,8 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
     func getViewControllerFor(index:Int)->GPPlaceViewController?{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let barViewController = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as! GPPlaceViewController
-        barViewController.place = GPSearchRadar.sharedInstance.searchQuery?.searchResults[index]
+//        barViewController.place = GPSearchRadar.sharedInstance.searchQuery?.searchResults[index]
+        barViewController.place = GPSearchRadar.sharedInstance.places[index]
         return barViewController
     
     }
@@ -125,7 +135,8 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
         let currentVC = self.viewControllers?.first as? GPPlaceViewController
         if currentVC != nil{
             if currentVC!.place != nil{
-                let indexCP = GPSearchRadar.sharedInstance.searchQuery?.searchResults.indexOf(currentVC!.place!)
+//                let indexCP = GPSearchRadar.sharedInstance.searchQuery?.searchResults.indexOf(currentVC!.place!)
+                let indexCP = GPSearchRadar.sharedInstance.places.indexOf(currentVC!.place!)
                 return indexCP
             }
         }

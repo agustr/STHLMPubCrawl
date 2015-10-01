@@ -13,19 +13,25 @@ import MapKit
 class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     
     static let sharedInstance = GPSearchRadar()
-    var places:[GPPlace]! = []
+    var places:[GPPlace]! = []{
+        didSet{
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kGPSearchRadarNewResultsNotifier, object: self))
+        }
+    }
     
     var currentPlace:GPPlace? = nil{
         didSet{
             NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kGPSearchRadarNewSelectedPlaceNotifier, object: self))
         }
     }
-    
+    func setQuery(query:GPPlacesSearchQuery!){
+        self.searchQuery = query
+    }
     // SearchRadar has a search query and a delta distance
     // the delta distance tells the radar after how many meters it shoudl update the query.
     
     /// The Google Places Search Query that the radar is looking for. See GPPlacesSearchQuery for documentation on how to set up a search query.
-    var searchQuery:GPPlacesSearchQuery? = nil {
+    private var searchQuery:GPPlacesSearchQuery? = nil {
         didSet{
             self.searchQuery?.delegate = self
         }
@@ -100,7 +106,13 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     }
     
     func googlePlacesSearchResult(searchResult: [GPPlace]?, error: String?, sender: GPPlacesSearchQuery!) {
-        print("GPSearchRadar googlePlacesSearchResult\nhasMoreResultsAvailable = \(sender.hasMoreResultsAvailable ) \nNumber of results all in all now: \(sender.searchResults.count)")
+        
+        if self.places.count == 0 {
+            self.currentPlace = sender.searchResults.first
+            self.places = sender.searchResults
+
+        }
+        
         if sender.hasMoreResultsAvailable {
             if (sender.searchResults.count < self.maxNumberOfResults){
                 
@@ -115,9 +127,9 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
                 return
             }
         }
-        print("posting notification: \(kGPSearchRadarNewResultsNotifier)")
+        
         self.places = self.searchQuery?.searchResults
-        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "kGPSearchRadarNewResultsNotifier", object: self))
+//        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "kGPSearchRadarNewResultsNotifier", object: self))
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {

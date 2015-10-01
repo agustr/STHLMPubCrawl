@@ -13,10 +13,11 @@ import MapKit
 
 class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
 
-    @IBOutlet var map: MKMapView!
+    @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var buttonAllNone: UIButton!
     
     var shouldCenter:Bool = true
-    var showSelectedPlaceOnly = true
+    var showSelectedPlaceOnly = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,37 +30,51 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         map.rotateEnabled = false
         map.showAnnotations(map.annotations, animated: true)
     }
+
+    @IBAction func buttonAllNonePressed() {
+        showSelectedPlaceOnly = !showSelectedPlaceOnly
+        if showSelectedPlaceOnly{
+            self.buttonAllNone.setTitle("All", forState: UIControlState.Normal)
+            map.removeAnnotations(map.annotations)
+            if let place = GPSearchRadar.sharedInstance.currentPlace as? MKAnnotation{
+                map.addAnnotation(place)
+            }
+
+        }
+        else{
+            self.buttonAllNone.setTitle("One", forState: UIControlState.Normal)
+            map.removeAnnotations(map.annotations)
+            map.addAnnotations(GPSearchRadar.sharedInstance.places)
+        }
+        // map.showAnnotations(map.annotations, animated: true)
+    }
+    
+    func layoutView(){
+        //
+        if showSelectedPlaceOnly {
+            if GPSearchRadar.sharedInstance.currentPlace != nil{
+                self.map.removeAnnotations(self.map.annotations)
+                self.map.addAnnotation(GPSearchRadar.sharedInstance.currentPlace!)
+            }
+        }
+        if GPSearchRadar.sharedInstance.currentPlace != nil{
+            let currentPlaceAnnotationView = self.map.viewForAnnotation(GPSearchRadar.sharedInstance.currentPlace!)
+            if currentPlaceAnnotationView != nil{
+                print("bringing this place to front  \(currentPlaceAnnotationView?.annotation?.title)")
+                self.map.bringSubviewToFront(currentPlaceAnnotationView!)
+            }
+        }
+    }
     
     func newSelectedPlace(){
         print("initial view controller got a new place selected call")
         // find the annotation that
-        for annotation in map.annotations{
-            if let place = annotation as? GPPlace{
-                let annotationview = map.viewForAnnotation(place)
-                annotationview?.image = UIImage(named: "beer-glass-20-BW")
-            }
-        }
-        if let currentPlace = GPSearchRadar.sharedInstance.currentPlace as? MKAnnotation{
-            print("change the look of the annotation.")
-            let annotView = map.viewForAnnotation(currentPlace)
-            annotView?.superview?.bringSubviewToFront(annotView!)
-            annotView?.image = UIImage(named: "beer-glass-20")
-        }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("the segue name is: \(segue.identifier)")
-    }
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+        self.layoutView()
     }
     
     func newSonarResultsAvailable(){
-        print("newSonarResultsAvailable")
-        if GPSearchRadar.sharedInstance.searchQuery?.searchResults.count > 0 {
-            self.dropMapItems((GPSearchRadar.sharedInstance.searchQuery?.searchResults)! , seconds: 2)
+        if GPSearchRadar.sharedInstance.places.count > 0 {
+            self.dropMapItems((GPSearchRadar.sharedInstance.places)! , seconds: 2)
         }
     }
     
@@ -74,10 +89,6 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         map.setRegion(coordinateRegion, animated: true)
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error.description)
-    }
-    
 //-------------
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         print("selected annotation")
@@ -85,10 +96,6 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
             print("it was an gpplace annotation")
             GPSearchRadar.sharedInstance.currentPlace = place
         }
-    }
-    
-    func mapView(_: MKMapView, didDeselectAnnotationView view: MKAnnotationView){
-    
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -99,10 +106,10 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
             return nil;
         }
         
-        var view = mapView.dequeueReusableAnnotationViewWithIdentifier("bech")
+        var view = mapView.dequeueReusableAnnotationViewWithIdentifier("bech") as? BarAnnotationView
         
         if view == nil {
-            view = MKAnnotationView(annotation: annotation, reuseIdentifier: "bech")
+            view = BarAnnotationView(annotation: annotation, reuseIdentifier: "bech")
             view!.canShowCallout = true
         } else {
             view!.annotation = annotation
@@ -111,14 +118,36 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         view!.leftCalloutAccessoryView = nil
         view!.rightCalloutAccessoryView = nil
         
-        if (annotation as? GPPlace != nil) {
-            let img = UIImage(named: "beer-glass-20-BW")
-            view!.image = img
+        if (view?.annotation as? GPPlace) == GPSearchRadar.sharedInstance.currentPlace{
+            view?.currentPlace = true
+        }
+        else{
+            view?.currentPlace = false
         }
         return view
     }
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
+        for annotationView in views{
+            if let place = annotationView.annotation as? GPPlace{
+                if place != GPSearchRadar.sharedInstance.currentPlace{
+                    map.sendSubviewToBack(annotationView)
+                    print("To the back: \(annotationView.annotation?.title)")
+                }
+                else{
+                    map.bringSubviewToFront(annotationView)
+                    print("To the front: \(annotationView.annotation?.title)")
+                }
+            }
+        }
+    }
         
+    /**
+    This function drops mapitems on the map equally distributed over the time indicated.
     
+    @mapItems An array of GPPlace objects to be dropped on the map
+    
+    @seconds How long the dropping is to take in seconds.
+    */
     func dropMapItems(mapItems:[GPPlace], seconds: Int){
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
