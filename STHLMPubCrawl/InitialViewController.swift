@@ -46,7 +46,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
             map.removeAnnotations(map.annotations)
             map.addAnnotations(GPSearchRadar.sharedInstance.places)
         }
-        // map.showAnnotations(map.annotations, animated: true)
+         map.showAnnotations(map.annotations, animated: true)
     }
     
     func layoutView(){
@@ -55,8 +55,10 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
             if GPSearchRadar.sharedInstance.currentPlace != nil{
                 self.map.removeAnnotations(self.map.annotations)
                 self.map.addAnnotation(GPSearchRadar.sharedInstance.currentPlace!)
+                self.map.showAnnotations(map.annotations, animated: true)
             }
         }
+        
         if GPSearchRadar.sharedInstance.currentPlace != nil{
             let currentPlaceAnnotationView = self.map.viewForAnnotation(GPSearchRadar.sharedInstance.currentPlace!)
             if currentPlaceAnnotationView != nil{
@@ -73,8 +75,13 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     }
     
     func newSonarResultsAvailable(){
-        if GPSearchRadar.sharedInstance.places.count > 0 {
-            self.dropMapItems((GPSearchRadar.sharedInstance.places)! , seconds: 2)
+        if showSelectedPlaceOnly {
+            
+        }
+        else{
+            if GPSearchRadar.sharedInstance.places.count > 0 {
+                self.dropMapItems((GPSearchRadar.sharedInstance.places)! , seconds: 2)
+            }
         }
     }
     
@@ -126,6 +133,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         }
         return view
     }
+    
     func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
         for annotationView in views{
             if let place = annotationView.annotation as? GPPlace{
@@ -148,7 +156,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     
     @seconds How long the dropping is to take in seconds.
     */
-    func dropMapItems(mapItems:[GPPlace], seconds: Int){
+    private func dropMapItems(mapItems:[GPPlace], seconds: Int){
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             // do some task
