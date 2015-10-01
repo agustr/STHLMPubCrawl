@@ -12,13 +12,26 @@ import MapKit
 
 class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     
+    
+    
     static let sharedInstance = GPSearchRadar()
+    
+    /// The desired accuracy
+    var desiredAccuracy:Double = 10
+    
+    /// How many results does the radar want from the GPPlacesSearchQuery at maximum.
+    var maxNumberOfResults:Int = 50
+    
+    /// This is the locationmanager for the service. It uses the standard location service, which allows you to specify the desired accuracy of the location data and receive updates as the location changes.
+    private let locationManager:CLLocationManager = CLLocationManager()
+    
+    /// These are the places that have been retreived from google.
     var places:[GPPlace]! = []{
         didSet{
             NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kGPSearchRadarNewResultsNotifier, object: self))
         }
     }
-    
+    /// currentPlace is the place currently being focused on.
     var currentPlace:GPPlace? = nil{
         didSet{
             NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kGPSearchRadarNewSelectedPlaceNotifier, object: self))
@@ -45,15 +58,6 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
             return self.locationManager.distanceFilter
         }
     }
-    
-    /// The desired accuracy
-    var desiredAccuracy:Double = 10
-    
-    /// How many results does the radar want from the GPPlacesSearchQuery at maximum.
-    var maxNumberOfResults:Int = 50
-    
-    /// This is the locationmanager for the service. It uses the standard location service, which allows you to specify the desired accuracy of the location data and receive updates as the location changes.
-    private let locationManager:CLLocationManager = CLLocationManager()
     
     override init(){
         // Always check authorisation before creating a CLLocationManger
