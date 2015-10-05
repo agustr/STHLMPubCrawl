@@ -9,6 +9,10 @@
 import Foundation
 import MapKit
 
+func == (left: GPPlace, right: GPPlace) -> Bool {
+    return (left.placeID == right.placeID)
+}
+
 class GPPlace:NSObject, MKAnnotation {
     var dictionary:NSDictionary = NSDictionary()
     var latitude:Double = 0
@@ -30,37 +34,38 @@ class GPPlace:NSObject, MKAnnotation {
     var title: String? { return name }
     
     var subtitle: String? { return vicinity }
-
+    
     var placeID:String { return (self.dictionary["place_id"] as? String)!}
     
-    var photos:[GPPhoto] = [GPPhoto]()
+    var photos:[GPPhoto]! = [GPPhoto]()
     
-    func getDetails(blocking:Bool){
+    private func getDetails(blocking:Bool, timeoutSeconds:Int){
         
         let gpKey = NSBundle.mainBundle().infoDictionary?["places-key"] as! String
         var requestURLStr = "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(self.placeID)&key=\(gpKey)"
         requestURLStr = requestURLStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
-        print("requesting the following url: \n \(requestURLStr)")
-        
         let url = NSURL(string: requestURLStr)
+        
+        let semaphore = dispatch_semaphore_create(0);
         
         if (url != nil) {
             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
             session.dataTaskWithURL(url!, completionHandler: { (data : NSData?, response : NSURLResponse?, error : NSError?) -> Void in
                 
                 if error != nil {
-                    print("not able to get further information on the place:\n \(error!.localizedDescription)")
+                  //  print("not able to get further information on the place:\n \(error!.localizedDescription)")
                 }
                 
                 if let statusCode = response as? NSHTTPURLResponse {
                     if statusCode.statusCode != 200 {
-                        print("Could not continue statuscode was \(statusCode)")
+                       // print("Could not continue statuscode was \(statusCode)")
                     }
                 }
                 
                 //var error:NSError? = NSError()
                 if data != nil {
+                    
                     let responseDictionary = (try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
                     self.dictionary = responseDictionary["result"] as! NSDictionary
                     let photosDictionaries = self.dictionary["photos"] as? [NSDictionary]
@@ -72,25 +77,32 @@ class GPPlace:NSObject, MKAnnotation {
                             self.photos.append(photo)
                         }
                     }
+                    self.hasGottenDetails = true
                 }
                 
-                //print("Detailed the photos for the place are: \n \(self.photos)")
-                
-                //print("Detailed response for place: \n \(self.dictionary)")
-                
-                //self.imageURL = NSURL(string: "http://e-barnyc.com/wp-content/uploads/2014/05/20140423_Es_bar-9571_ENF.tif.jpg")
-                
+                if blocking{
+                    // if it is idicated that the caller wants to wait for the call to be finished
+                    dispatch_semaphore_signal(semaphore);
+                }
             }).resume()
+            
+            if blocking{
+                // if it is idicated that the caller wants to wait for the call to be finished
+                dispatch_semaphore_wait(semaphore, UInt64(timeoutSeconds) * NSEC_PER_SEC);
+            }
         }
     }
     
-    func getImageWithHandler(copmpletionhandler:(img:UIImage)->Void){
-        
+    /// Checks for details on the web and calls the completion handler when
+    /// finished.
+    ///
+    ///
+    ///
+    func getDetailsWith(copmpletionhandler:()->Void){
         if !self.hasGottenDetails{
-            getDetails(true) // get details and wait for them to return
+            getDetails(true, timeoutSeconds: 30) // get details and wait for them to return
         }
-        
-        
+        copmpletionhandler()
     }
     
     
@@ -113,8 +125,6 @@ class GPPlace:NSObject, MKAnnotation {
                 }
             }
         }
-        
-        
         
         if let vicin = dict["vicinity"] as? String{
             vicinity = vicin

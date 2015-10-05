@@ -126,11 +126,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nonobarimage" translatesAutoresizingMaskIntoConstraints="NO" id="b44-Sp-VqV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nonobarimage" translatesAutoresizingMaskIntoConstraints="NO" id="b44-Sp-VqV">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw1-uq-Vn2" userLabel="Barname" customClass="UILabelPadded" customModule="STHLMPubCrawl" customModuleProvider="target">
-                                <rect key="frame" x="20" y="28" width="560" height="21"/>
+                                <rect key="frame" x="20" y="28" width="560" height="20.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -171,10 +172,10 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Photo available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKj-IR-9Th">
-                                <rect key="frame" x="152" y="282" width="297" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jld-uT-3Hs">
+                                <rect key="frame" x="222" y="277.5" width="156.5" height="45.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -182,7 +183,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="mw1-uq-Vn2" secondAttribute="leading" id="2LQ-Gz-ca4"/>
-                            <constraint firstItem="hKj-IR-9Th" firstAttribute="centerX" secondItem="qFp-hL-eND" secondAttribute="centerX" id="3Br-YD-Sj4"/>
                             <constraint firstItem="O5i-Zr-0cE" firstAttribute="leading" secondItem="mw1-uq-Vn2" secondAttribute="leading" id="Gy5-iI-Up0"/>
                             <constraint firstItem="b44-Sp-VqV" firstAttribute="leading" secondItem="qFp-hL-eND" secondAttribute="leading" id="Hm2-Ba-F5D"/>
                             <constraint firstItem="yjg-Rz-KVw" firstAttribute="top" secondItem="O5i-Zr-0cE" secondAttribute="bottom" constant="8" symbolic="YES" id="JTo-Ru-eX5"/>
@@ -191,16 +191,17 @@
                             <constraint firstAttribute="trailing" secondItem="b44-Sp-VqV" secondAttribute="trailing" id="UL5-77-ejm"/>
                             <constraint firstItem="u9T-oO-7UI" firstAttribute="top" secondItem="mw1-uq-Vn2" secondAttribute="bottom" id="ULU-XA-cGr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u9T-oO-7UI" secondAttribute="trailing" id="YS7-GO-riJ"/>
+                            <constraint firstItem="jld-uT-3Hs" firstAttribute="centerY" secondItem="qFp-hL-eND" secondAttribute="centerY" id="bxi-NM-tt3"/>
                             <constraint firstItem="u0T-dy-aFl" firstAttribute="trailing" secondItem="u9T-oO-7UI" secondAttribute="trailing" id="fLd-eN-jRS"/>
                             <constraint firstItem="yjg-Rz-KVw" firstAttribute="top" secondItem="u0T-dy-aFl" secondAttribute="bottom" constant="8" symbolic="YES" id="fQp-Sh-eBW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mw1-uq-Vn2" secondAttribute="trailing" id="g5G-jm-Ipi"/>
-                            <constraint firstItem="hKj-IR-9Th" firstAttribute="centerY" secondItem="qFp-hL-eND" secondAttribute="centerY" id="tVR-mi-ZL0"/>
+                            <constraint firstItem="jld-uT-3Hs" firstAttribute="centerX" secondItem="qFp-hL-eND" secondAttribute="centerX" id="w79-Fo-V2d"/>
                             <constraint firstItem="b44-Sp-VqV" firstAttribute="bottom" secondItem="yjg-Rz-KVw" secondAttribute="top" id="xwQ-70-mZJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="barImageView" destination="b44-Sp-VqV" id="efV-as-0aF"/>
-                        <outlet property="labelNoPhoto" destination="hKj-IR-9Th" id="w2H-pD-YbE"/>
+                        <outlet property="labelNoPhoto" destination="jld-uT-3Hs" id="pfo-Kl-wBs"/>
                         <outlet property="labelPlaceName" destination="mw1-uq-Vn2" id="y9l-lW-0wq"/>
                         <outlet property="typesLabel" destination="u9T-oO-7UI" id="5Vp-8u-dX3"/>
                     </connections>

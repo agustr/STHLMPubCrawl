@@ -133,17 +133,17 @@ class GPPlacesSearchQuery{
         self.types = types
         self.rankByDistance = rankByDistance
         
-        print("\(self.keyword==nil)  \n \(self.name==nil)  \n \(self.types==nil) \(self.types?.count==0)")
+       // print("\(self.keyword==nil)  \n \(self.name==nil)  \n \(self.types==nil) \(self.types?.count==0)")
         
         if (self.key==nil){ return nil }
         
         if((self.keyword==nil || self.keyword=="")&&(self.name==nil || self.name=="")&&(self.types==nil || self.types?.count==0)){
-            print("One of the parameters 'keyword', 'name', 'types' must be set")
+           // print("One of the parameters 'keyword', 'name', 'types' must be set")
             return nil
         }
         
         if(!rankByDistance) {
-            print("rankByDistance must be set to 'true'")
+           // print("rankByDistance must be set to 'true'")
             return nil
         }
         
@@ -226,7 +226,7 @@ class GPPlacesSearchQuery{
             urlString = ""
         }
         
-        print("the URL where we are getting the data from is \n \(urlEncodedString)")
+       // print("the URL where we are getting the data from is \n \(urlEncodedString)")
         
         return NSURL(string: urlString)
     }
@@ -237,7 +237,7 @@ class GPPlacesSearchQuery{
     /// Takes a json data response and returns an array containing the GPPlace's that the response produced.
     /// Always returns an array if no places were found the array is empty.
     private func parseFromData(data : NSData) -> [GPPlace] {
-        print("parsing json")
+       // print("parsing json")
         var mapItems:[GPPlace]=[]
         let json = (try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)) as? NSDictionary
         let results = json?["results"] as? Array<NSDictionary>
@@ -263,13 +263,13 @@ class GPPlacesSearchQuery{
     /// parameters used previously — all parameters other than pagetoken will be ignored.
     func getNextTwentyResults(){
 
-        print("getNextTwentyResults now the \(self.searchResults.count)")
+       // print("getNextTwentyResults now the \(self.searchResults.count)")
         if (self.lastReceivedPageToken != nil){
             var urlString:String? = "\(URL)key=\(self.key)&pagetoken=\(self.lastReceivedPageToken!)"
             urlString = urlString!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
             var url:NSURL?
             
-            print("getNextTwentyResults url: \(urlString)")
+           // print("getNextTwentyResults url: \(urlString)")
             
             if urlString != nil{
                 url = NSURL(string: urlString!)
@@ -296,7 +296,7 @@ class GPPlacesSearchQuery{
                         self.delegate?.googlePlacesSearchResult(newResults, error: nil, sender: self)})
                     }
                     
-                    print("After: self.searchresults: \(self.searchResults.count)")
+                   // print("After: self.searchresults: \(self.searchResults.count)")
                 }).resume()
             }
         }
@@ -397,11 +397,11 @@ class GPPlacesSearchQuery{
                 return urlString
             }
             else{
-                print("an empty name string has been passed")
+               // print("an empty name string has been passed")
             }
         }
         else{
-            print("we dont have a name string")
+           // print("we dont have a name string")
         }
         return url
     }
@@ -429,7 +429,7 @@ class GPPlacesSearchQuery{
                 newUrl = "\(newUrl)|\(type)"
             }
             
-            print("\(type)")
+            // print("\(type)")
         }
         
         return newUrl

@@ -62,14 +62,14 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         if GPSearchRadar.sharedInstance.currentPlace != nil{
             let currentPlaceAnnotationView = self.map.viewForAnnotation(GPSearchRadar.sharedInstance.currentPlace!)
             if currentPlaceAnnotationView != nil{
-                print("bringing this place to front  \(currentPlaceAnnotationView?.annotation?.title)")
+                // print("bringing this place to front  \(currentPlaceAnnotationView?.annotation?.title)")
                 self.map.bringSubviewToFront(currentPlaceAnnotationView!)
             }
         }
     }
     
     func newSelectedPlace(){
-        print("initial view controller got a new place selected call")
+        // print("initial view controller got a new place selected call")
         // find the annotation that
         self.layoutView()
     }
@@ -98,9 +98,9 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     
 //-------------
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        print("selected annotation")
+        // print("selected annotation")
         if let place = view.annotation as? GPPlace{
-            print("it was an gpplace annotation")
+            // print("it was an gpplace annotation")
             GPSearchRadar.sharedInstance.currentPlace = place
         }
     }
@@ -139,11 +139,11 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
             if let place = annotationView.annotation as? GPPlace{
                 if place != GPSearchRadar.sharedInstance.currentPlace{
                     map.sendSubviewToBack(annotationView)
-                    print("To the back: \(annotationView.annotation?.title)")
+                    // print("To the back: \(annotationView.annotation?.title)")
                 }
                 else{
                     map.bringSubviewToFront(annotationView)
-                    print("To the front: \(annotationView.annotation?.title)")
+                    // print("To the front: \(annotationView.annotation?.title)")
                 }
             }
         }
@@ -161,7 +161,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             // do some task
             let interval:Double = (Double(seconds) / Double(mapItems.count))
-            print("The interval is:\(interval)")
+            // print("The interval is:\(interval)")
             var x = 1
             for mItem in mapItems{
                 

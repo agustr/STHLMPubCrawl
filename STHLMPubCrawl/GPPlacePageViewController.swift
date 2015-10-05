@@ -53,7 +53,7 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
     
     func newSonarResultsAvailable(){
         
-        print("receiving notification!")
+       // print("receiving notification!")
         
         var nextPresentedViewController:GPPlaceViewController?
         let currentVC = self.viewControllers?.first as? GPPlaceViewController
@@ -97,7 +97,7 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        print("viewControllerAfterViewController")
+        //print("viewControllerAfterViewController")
         let currentIndex = self.indexOfCurrentPlace()
         if currentIndex != nil{
             let nextIndex = currentIndex! + 1
@@ -110,7 +110,7 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        print("viewControllerBeforeViewController")
+       // print("viewControllerBeforeViewController")
         let currentIndex = self.indexOfCurrentPlace()
         if currentIndex != nil{
             let nextIndex = currentIndex! - 1

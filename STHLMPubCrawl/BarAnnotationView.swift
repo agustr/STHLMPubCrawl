@@ -24,6 +24,10 @@ class BarAnnotationView: MKAnnotationView {
         }
     }
     
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         //print("override init(annotation: MKAnnotation?, reuseIdentifier: String?)")

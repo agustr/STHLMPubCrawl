@@ -19,7 +19,7 @@ class Beeper {
         do{
             try audioPlayer = AVAudioPlayer(contentsOfURL: url!)
         }catch {
-            print("Player not available")
+            // print("Player not available")
             audioPlayer = nil
             return nil
         }
@@ -28,6 +28,6 @@ class Beeper {
     
     func playBeep(){
         self.audioPlayer?.play()
-        print("beeping")
+       // print("beeping")
     }
 }

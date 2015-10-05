@@ -40,17 +40,17 @@ class GPPhoto: NSObject {
         return Double(self.width)/Double(self.height)
     }
     
-    func getImageRequestUrl(maxWidth:Int?, maxHeight:Int?)->NSURL?{
+    func getImageRequestUrl(maxWidth:CGFloat?, maxHeight:CGFloat?)->NSURL?{
         var urlStr:String! = "https://maps.googleapis.com/maps/api/place/photo?"
         
         if maxWidth != nil{
-            urlStr = urlStr + "maxwidth=\(maxWidth!)&"
+            urlStr = urlStr + "maxwidth=\(Int(maxWidth!))&"
         }
         if maxHeight != nil{
-                urlStr = urlStr + "maxheight=\(maxHeight!)&"
+            urlStr = urlStr + "maxheight=\(Int(maxHeight!))&"
         }
         if let photoreferenceid = self.dictionary?["photo_reference"] as? String {
-            urlStr = urlStr + "&photoreference=\(photoreferenceid)&"
+            urlStr = urlStr + "photoreference=\(photoreferenceid)&"
         }
         if let gpKey = NSBundle.mainBundle().infoDictionary?["places-key"] as? String{
             urlStr = urlStr + "key=\(gpKey)"
@@ -61,14 +61,14 @@ class GPPhoto: NSObject {
         return url
     }
     
-    func getImageFromWeb(maxWidth: Int?, maxHeight:Int?) -> UIImage? {
+    func getImageFromWeb(maxWidth: CGFloat?, maxHeight:CGFloat?) -> UIImage? {
         
         let requestURL = self.getImageRequestUrl(maxWidth, maxHeight: maxHeight)
-        print("the photo request is: \(requestURL)")
+        //print("the photo request is: \(requestURL)")
         if requestURL != nil{
-            print("trying to fech image")
+            // print("trying to fech image")
             let imageData = NSData(contentsOfURL: requestURL!)
-            print("finished fetching image")
+           // print("finished fetching image")
             if imageData != nil{
                 let imageBar = UIImage(data: imageData!)
                 return imageBar
@@ -77,19 +77,26 @@ class GPPhoto: NSObject {
         return nil
     }
     
-    func getImageThatFitsContainerOfSize(size:CGSize){
-    
+    func getImageRequestUrlThatFitsContainerOfSize(size:CGSize)->NSURL?{
+        let requestSize = self.size.scaledToFitRegardlessOfOrientationContainerOfSize(size)
+        return getImageRequestUrl(requestSize.width, maxHeight: nil)
     }
     
-    func getImageThatFillsContainerOfSize(size:CGSize){
     
-    }
     
-    func maxPhotoResizeFactor(photoSize:CGSize!, containerSize: CGSize!)->CGFloat{
-        let widthToWidthFactor = (containerSize.width / photoSize.width)
-        let heigtToHeigtFactor = (containerSize.height /  photoSize.height)
-        let WidthToHeightFactor = (containerSize.width / photoSize.height)
-        let HeigthToWidthFactor = (containerSize.height / photoSize.width)
-        return max(max(widthToWidthFactor, heigtToHeigtFactor), max(WidthToHeightFactor,HeigthToWidthFactor))
-    }
+    //    func getImageThatFitsContainerOfSize(size:CGSize){
+    //
+    //    }
+    //
+    //    func getImageThatFillsContainerOfSize(size:CGSize){
+    //
+    //    }
+    //
+    //    func maxPhotoResizeFactor(photoSize:CGSize!, containerSize: CGSize!)->CGFloat{
+    //        let widthToWidthFactor = (containerSize.width / photoSize.width)
+    //        let heigtToHeigtFactor = (containerSize.height /  photoSize.height)
+    //        let WidthToHeightFactor = (containerSize.width / photoSize.height)
+    //        let HeigthToWidthFactor = (containerSize.height / photoSize.width)
+    //        return max(max(widthToWidthFactor, heigtToHeigtFactor), max(WidthToHeightFactor,HeigthToWidthFactor))
+    //    }
 }

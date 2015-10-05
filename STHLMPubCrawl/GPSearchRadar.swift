@@ -61,7 +61,7 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     
     override init(){
         // Always check authorisation before creating a CLLocationManger
-        print("initialising search radar")
+        // print("initialising search radar")
 
 //        self.locationManager = CLLocationManager()
         super.init()
@@ -69,11 +69,11 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     }
     
     deinit{
-        print("search radar deinint")
+        // print("search radar deinint")
     }
     
     private func configureLocationManager(){
-        print("configured location manager for the GPSearchRadar")
+       //  print("configured location manager for the GPSearchRadar")
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.delegate = self
         self.locationManager.distanceFilter = 2000
@@ -86,24 +86,24 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
         
         // The most recent location is at the end of the array. Lets use that one.
         let lastUserLocation = locations.last! // locationManager docs say locations always contain at least one location.
-        print("GPSearchRadar received location")
+        // print("GPSearchRadar received location")
         
         if self.searchQuery != nil {
-            print("we have a searchQuery")
+            // print("we have a searchQuery")
             
             if searchQuery?.searchLocation != nil{
-                print("we have a search location")
+                // print("we have a search location")
                 let distance = self.distanceBetween(lastUserLocation, secondLocation: self.searchQuery!.searchLocation!)
-                print("the distance between the current query and current location is \(distance)")
+                // print("the distance between the current query and current location is \(distance)")
                 
                 if (distance > self.distanceFilter){
-                    print("the delta distance requriements are fullfilled")
+                    // print("the delta distance requriements are fullfilled")
                     Beeper.sharedBeeper?.playBeep()
                     self.searchQuery?.searchWith(lastUserLocation.coordinate)
                 }
             }
             else{
-                print("the search location is nil we need an initial search")
+                // print("the search location is nil we need an initial search")
                 self.searchQuery?.searchWith(lastUserLocation.coordinate)
             }
         }
@@ -121,11 +121,11 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
             if (sender.searchResults.count < self.maxNumberOfResults){
                 
                 let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64( 5000 * Double(NSEC_PER_MSEC)))
-                print("delayTime: \(delayTime)")
+                // print("delayTime: \(delayTime)")
                 
                 NSLog("before dispatching")
                 dispatch_after(delayTime, dispatch_get_main_queue()) {
-                    print("delayed getting results")
+                    // print("delayed getting results")
                     self.searchQuery?.getNextTwentyResults()
                 }
                 return
@@ -137,11 +137,11 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("\(error.localizedDescription)")
+        // print("\(error.localizedDescription)")
     }
         
     func locationManager(manager: CLLocationManager, didFinishDeferredUpdatesWithError error: NSError?) {
-        print("\(error?.localizedDescription)")
+        // print("\(error?.localizedDescription)")
     }
         
     func distanceBetween2DLocations(firstLocation:CLLocationCoordinate2D, secondLocation:CLLocationCoordinate2D)->CLLocationDistance {

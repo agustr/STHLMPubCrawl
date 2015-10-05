@@ -6,25 +6,34 @@
 //  Copyright (c) 2015 Agust Rafnsson. All rights reserved.
 //
 
+import Kingfisher
 import UIKit
 
 
 class GPPlaceViewController: UIViewController {
-    
+
     var place:GPPlace?{
         didSet{
-            self.updateUI()
+            if self.isViewLoaded(){
+                self.updateUI()
+            }
         }
     }
-    
+
     @IBOutlet var labelNoPhoto: UILabel!
     @IBOutlet var typesLabel: UILabel!
     @IBOutlet var labelPlaceName: UILabel!
     @IBOutlet var barImageView: UIImageView!
     
+    var isGeometryReady: Bool! = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if self.parentViewController != nil{
+            self.view.frame.size = self.parentViewController!.view.frame.size
+            self.view.layoutSubviews()
+        }
+        print("viewDidLoad \(self.place?.name) \(self.view.frame.size)  self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
         // Do any additional setup after loading the view.
         // get place from file:
         self.view.layer.masksToBounds = true
@@ -33,56 +42,122 @@ class GPPlaceViewController: UIViewController {
         self.labelNoPhoto.hidden = true
     }
     
-    func updateUI(){
-        if self.labelPlaceName != nil{
-            self.labelPlaceName.text = place?.name
-            //self.labelPlaceName.text = "stuffit"
-            self.showTypes()
-            
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
-            
-            dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
-                self.showPhoto()
-            }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.parentViewController != nil{
+            self.view.frame.size = self.parentViewController!.view.frame.size
+            self.view.layoutSubviews()
         }
+        print("viewWillAppear \(self.place?.name) \(self.view.frame.size)  self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+
+        isGeometryReady = true
+        self.view.frame.size =  (self.parentViewController?.view.frame.size)!
+        self.updateUI()
     }
     
-    func showPhoto(){
-        print("show photo")
-        if self.place != nil {
-            let photo = self.place?.photos.first
-            if photo != nil{
-                let queue = dispatch_queue_create("ble", nil)
-                dispatch_async(queue, { () -> Void in
-                    let maxHeigt = Int(CGFloat(photo!.height) * (self.maxPhotoResizeFactor(photo!.size, containerSize: self.barImageView.frame.size)))
-                    print("the max heigt is : \(maxHeigt)")
-                    let barImage = photo!.getImageFromWeb(nil ,maxHeight: maxHeigt)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if barImage != nil{
-                            self.barImageView.image = barImage
-                        }else{
-                            print("no photo available online for this place")
-                            self.labelNoPhoto.hidden = false
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+        self.place?.getDetailsWith({ () -> Void in
+            self.updateUI()
+        })
+    }
+    
+    override func willMoveToParentViewController(parent: UIViewController?) {
+        super.willMoveToParentViewController(parent)
+        print("willMoveToParentViewController \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+    }
+    
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        print("didMoveToParentViewController \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+    }
+    
+    
+    
+    
+    private func updateUI(){
+    
+        if self.labelPlaceName != nil{
+            self.labelPlaceName.text = place?.name
+            self.showTypes()
+        }
+        
+        
+        if let photo = self.place?.photos.first {
+            if (self.isGeometryReady == true) {
+                print("has photo, geometry is ready \(self.place?.name)")
+                self.kfSetPhoto(photo)
+            }
+            else{
+                print("gemetry not ready")
+            }
+        }
+        else {
+            if (self.place?.hasGottenDetails == false){
+                print("getting details for place with callback \(self.place?.name)")
+                self.place?.getDetailsWith({ () -> Void in
+                    print("in the callback for getting details \(self.place?.name)")
+                    if self.isGeometryReady == true {
+                        print("in the callback for getting details and the geometry is set \(self.place?.name) ")
+                        //self.showPhoto()
+                        if let photo = self.place?.photos.first{
+                            self.kfSetPhoto(photo)
                         }
+                    }
+                    else{
+                        print("got the details for \(self.place?.name) but geometry not ready")
                     }
                 })
             }
-            else{
-                print("no photo in the photo array for this place")
-                self.labelNoPhoto.hidden = false
-            }
         }
     }
     
-    /// Returns the resize factor needed to make the photo be able to fill the container 
-    /// both horizontally and vertically. (the container is assumed to use resize to fill)
-    func maxPhotoResizeFactor(photoSize:CGSize!, containerSize: CGSize!)->CGFloat{
-        let widthToWidthFactor = (containerSize.width / photoSize.width)
-        let heigtToHeigtFactor = (containerSize.height /  photoSize.height)
-        let WidthToHeightFactor = (containerSize.width / photoSize.height)
-        let HeigthToWidthFactor = (containerSize.height / photoSize.width)
-        return max(max(widthToWidthFactor, heigtToHeigtFactor), max(WidthToHeightFactor,HeigthToWidthFactor))
+    func kfSetPhoto(photo:GPPhoto!){
+        let url = photo.getImageRequestUrlThatFitsContainerOfSize(self.barImageView.frame.size)
+        print(url?.description)
+        self.barImageView.kf_setImageWithURL(url!, placeholderImage: nil, optionsInfo: nil, progressBlock: { (receivedSize, totalSize) -> () in
+            // print("Downloading photo of \(self.place?.name): \(receivedSize)/ \(totalSize)")
+            }, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                if (image == nil) {
+                    //print("there was no photo downloaded for \(self.place?.name)")
+                }
+                self.labelNoPhoto.hidden = true
+                //print("finished downloading photo for \(self.place?.name)")
+        })
+        
+    
     }
+    
+    // tries to show the first photo in the array of photos. Should not be called untill all the 
+    // layout sizes and stuff is ready (viewwillappear).
+//    func showPhoto(){
+//        print("show photo")
+//        if self.place?.photos != nil {
+//            if self.place!.photos.count == 0{
+//                if self.place?.hasGottenDetails == false{
+//                    
+//                    // has no photos has can get details
+//                    self.place?.getDetailsWith({ () -> Void in
+//                        let photo =  self.place?.photos.first
+//                        if photo != nil{
+//                            self.kfSetPhoto(photo!)
+//                        }
+//                    })
+//                }
+//                else{
+//                    // has no photos can not get more details
+//                    self.labelNoPhoto.hidden = false
+//                }
+//            }
+//            else{
+//                // has photos so show one
+//                if let photo = self.place?.photos.first{
+//                    self.kfSetPhoto(photo)
+//                }
+//            }
+//        }
+//    }
     
     func showTypes(){
         if self.place != nil{
@@ -118,19 +193,13 @@ class GPPlaceViewController: UIViewController {
             }
     }
     
-    override func viewDidLayoutSubviews() {
-        self.view.layoutIfNeeded()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        self.place?.getDetails(false)
-    }
+
     
     func downloadImage(url:NSURL){
         //print("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
         getDataFromUrl(url) { data in
             dispatch_async(dispatch_get_main_queue()) {
-          //      print("Finished downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //      print("Finished downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
                 self.barImageView.image = UIImage(data: data!)
             }
         }
@@ -154,7 +223,7 @@ class GPPlaceViewController: UIViewController {
                 if jdict != nil {
                     dict = jdict!
                 }
-               // statements
+                // statements
                 
             } catch let caught as NSError {
                 print("could not serialise data, localizedDescription: \(caught.localizedDescription)")
@@ -165,7 +234,7 @@ class GPPlaceViewController: UIViewController {
             catch{
                 print("caught an exeption serialising json but it was not an nserror")
             }
-
+            
         }
         
         var results = dict["results"] as? Array<NSDictionary>
@@ -178,15 +247,15 @@ class GPPlaceViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
