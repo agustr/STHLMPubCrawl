@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Agust Rafnsson. All rights reserved.
 //
 
+import SDWebImage
 import Foundation
 import MapKit
 
@@ -20,6 +21,11 @@ class GPPlace:NSObject, MKAnnotation {
     var name:String = ""
     var types:[String] = ["no type"]
     var vicinity:String? = ""
+    var rating:Double? {
+        let rate = self.dictionary["rating"] as? Double
+        print("the rating for \(self.name) is \(rate)")
+        return rate
+    }
     
     var hasGottenDetails:Bool! = false
     
@@ -39,15 +45,13 @@ class GPPlace:NSObject, MKAnnotation {
     
     var photos:[GPPhoto]! = [GPPhoto]()
     
-    private func getDetails(blocking:Bool, timeoutSeconds:Int){
+    func getDetails(completionHandler:()->Void){
         
         let gpKey = NSBundle.mainBundle().infoDictionary?["places-key"] as! String
         var requestURLStr = "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(self.placeID)&key=\(gpKey)"
         requestURLStr = requestURLStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
         let url = NSURL(string: requestURLStr)
-        
-        let semaphore = dispatch_semaphore_create(0);
         
         if (url != nil) {
             let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
@@ -67,7 +71,9 @@ class GPPlace:NSObject, MKAnnotation {
                 if data != nil {
                     
                     let responseDictionary = (try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
-                    self.dictionary = responseDictionary["result"] as! NSDictionary
+                    if let dict = responseDictionary["result"] as? NSDictionary{
+                        self.dictionary = dict
+                    }
                     let photosDictionaries = self.dictionary["photos"] as? [NSDictionary]
                     
                     if photosDictionaries != nil{
@@ -79,32 +85,39 @@ class GPPlace:NSObject, MKAnnotation {
                     }
                     self.hasGottenDetails = true
                 }
-                
-                if blocking{
-                    // if it is idicated that the caller wants to wait for the call to be finished
-                    dispatch_semaphore_signal(semaphore);
-                }
+                completionHandler()
             }).resume()
-            
-            if blocking{
-                // if it is idicated that the caller wants to wait for the call to be finished
-                dispatch_semaphore_wait(semaphore, UInt64(timeoutSeconds) * NSEC_PER_SEC);
+        }
+    }
+    
+    // Fetches the first available photo for the place
+    // 
+    func preHeat(size:CGSize){
+        print("the place \(self.name) is preheating an image with the size \(size)")
+        if self.photos.count > 0 {
+            // preheat the photo
+            let photo = self.photos.first
+            let url = photo!.getImageRequestUrlThatFitsContainerOfSize(size)
+            if url != nil{
+                print("preheating \(self.name) : \(url)")
+                SDWebImagePrefetcher.sharedImagePrefetcher().prefetchURLs([url!])
             }
         }
-    }
-    
-    /// Checks for details on the web and calls the completion handler when
-    /// finished.
-    ///
-    ///
-    ///
-    func getDetailsWith(copmpletionhandler:()->Void){
-        if !self.hasGottenDetails{
-            getDetails(true, timeoutSeconds: 30) // get details and wait for them to return
+        else{
+            self.getDetails({ () -> Void in
+                if self.photos.count > 0 {
+                    // preheat the photo
+                    let photo = self.photos.first
+                    let url = photo!.getImageRequestUrlThatFitsContainerOfSize(size)
+                    if url != nil{
+                        print("preheating \(self.name) : \(url)")
+                        SDWebImagePrefetcher.sharedImagePrefetcher().prefetchURLs([url!])
+                    }
+                }
+            })
         }
-        copmpletionhandler()
     }
-    
+
     
     //--------------------------------
     // MKAnnotation Protocol End

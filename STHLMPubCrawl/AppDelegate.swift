@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,13 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if gpQuery != nil{
             GPSearchRadar.sharedInstance.setQuery(gpQuery)
         }
-        
-        let cache = KingfisherManager.sharedManager.cache
-        // Set max disk cache to 50 mb. Default is no limit.
-        cache.maxDiskCacheSize = 50 * 1024 * 1024
-        
-        // Set max disk cache to duration to 3 days, Default is 1 week.
-        cache.maxCachePeriodInSecond = 60 * 60 * 24 * 30
         
         return true
     }

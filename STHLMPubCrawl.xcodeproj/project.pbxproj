@@ -10,6 +10,7 @@
 		8A4E2BD81BBEB70700FC8C68 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4E2BD71BBEB70700FC8C68 /* Kingfisher.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8A4E2BDA1BBEB80500FC8C68 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4E2BD91BBEB80500FC8C68 /* MapKit.framework */; };
 		8A4E2BDC1BBEB81600FC8C68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4E2BDB1BBEB81600FC8C68 /* CoreLocation.framework */; };
+		8A53C8BE1BC2963100F21286 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A53C8BD1BC2963100F21286 /* SDWebImage.framework */; };
 		8A6CA0911BB012ED0062AD2C /* GPPlacePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		8A6CA0951BB129A90062AD2C /* beer-glass-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A6CA0941BB129A90062AD2C /* beer-glass-20.png */; settings = {ASSET_TAGS = (); }; };
 		8A9156621BAF04FC00839503 /* STHLMPubCrawlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156611BAF04FC00839503 /* STHLMPubCrawlTests.swift */; };
@@ -59,6 +60,7 @@
 		8A4E2BD71BBEB70700FC8C68 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "Pods/../build/Debug-iphoneos/Kingfisher.framework"; sourceTree = "<group>"; };
 		8A4E2BD91BBEB80500FC8C68 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8A4E2BDB1BBEB81600FC8C68 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8A53C8BD1BC2963100F21286 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "Pods/../build/Debug-iphoneos/SDWebImage.framework"; sourceTree = "<group>"; };
 		8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPPlacePageViewController.swift; sourceTree = "<group>"; };
 		8A6CA0941BB129A90062AD2C /* beer-glass-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-glass-20.png"; sourceTree = "<group>"; };
 		8A9156491BAF04FC00839503 /* STHLMPubCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STHLMPubCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A53C8BE1BC2963100F21286 /* SDWebImage.framework in Frameworks */,
 				8A4E2BDC1BBEB81600FC8C68 /* CoreLocation.framework in Frameworks */,
 				8A4E2BDA1BBEB80500FC8C68 /* MapKit.framework in Frameworks */,
 				8A4E2BD81BBEB70700FC8C68 /* Kingfisher.framework in Frameworks */,
@@ -206,6 +209,7 @@
 		C82DFCC1484434FA60421422 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A53C8BD1BC2963100F21286 /* SDWebImage.framework */,
 				8A4E2BDB1BBEB81600FC8C68 /* CoreLocation.framework */,
 				8A4E2BD91BBEB80500FC8C68 /* MapKit.framework */,
 				8A4E2BD71BBEB70700FC8C68 /* Kingfisher.framework */,
@@ -473,7 +477,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Pods/Kingfisher";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Pods/Kingfisher",
+					"$(SRCROOT)/Pods/SDWebImage",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -520,7 +527,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Pods/Kingfisher";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Pods/Kingfisher",
+					"$(SRCROOT)/Pods/SDWebImage",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

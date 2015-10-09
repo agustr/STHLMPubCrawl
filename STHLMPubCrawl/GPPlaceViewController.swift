@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Agust Rafnsson. All rights reserved.
 //
 
-import Kingfisher
+// import Kingfisher
+
+import SDWebImage
 import UIKit
+import Cosmos
 
 
 class GPPlaceViewController: UIViewController {
@@ -24,6 +27,7 @@ class GPPlaceViewController: UIViewController {
     @IBOutlet var typesLabel: UILabel!
     @IBOutlet var labelPlaceName: UILabel!
     @IBOutlet var barImageView: UIImageView!
+    @IBOutlet weak var ratingStars: CosmosView!
     
     var isGeometryReady: Bool! = false
     
@@ -33,7 +37,7 @@ class GPPlaceViewController: UIViewController {
             self.view.frame.size = self.parentViewController!.view.frame.size
             self.view.layoutSubviews()
         }
-        print("viewDidLoad \(self.place?.name) \(self.view.frame.size)  self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+        // print("viewDidLoad \(self.place?.name) \(self.view.frame.size)  self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
         // Do any additional setup after loading the view.
         // get place from file:
         self.view.layer.masksToBounds = true
@@ -48,7 +52,7 @@ class GPPlaceViewController: UIViewController {
             self.view.frame.size = self.parentViewController!.view.frame.size
             self.view.layoutSubviews()
         }
-        print("viewWillAppear \(self.place?.name) \(self.view.frame.size)  self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+        // print("viewWillAppear \(self.place?.name) \(self.view.frame.size)  self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
 
         isGeometryReady = true
         self.view.frame.size =  (self.parentViewController?.view.frame.size)!
@@ -57,26 +61,31 @@ class GPPlaceViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        print("viewDidAppear \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
-        self.place?.getDetailsWith({ () -> Void in
+        // print("viewDidAppear \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+        self.place?.getDetails({ () -> Void in
             self.updateUI()
         })
     }
     
     override func willMoveToParentViewController(parent: UIViewController?) {
         super.willMoveToParentViewController(parent)
-        print("willMoveToParentViewController \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+        // print("willMoveToParentViewController \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
     }
     
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
-        print("didMoveToParentViewController \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
+        // print("didMoveToParentViewController \(self.place?.name) \(self.view.frame.size) self.parentViewController?.view.frame.size \(self.parentViewController?.view.frame.size)")
     }
     
     
     
     
     private func updateUI(){
+        
+        if let rate = self.place?.rating{
+            self.ratingStars.hidden = false
+            self.ratingStars.rating = rate
+        }
     
         if self.labelPlaceName != nil{
             self.labelPlaceName.text = place?.name
@@ -86,78 +95,47 @@ class GPPlaceViewController: UIViewController {
         
         if let photo = self.place?.photos.first {
             if (self.isGeometryReady == true) {
-                print("has photo, geometry is ready \(self.place?.name)")
-                self.kfSetPhoto(photo)
+                // print("has photo, geometry is ready \(self.place?.name)")
+                self.sdSetPhoto(photo)
             }
             else{
-                print("gemetry not ready")
+                // print("gemetry not ready")
             }
         }
         else {
             if (self.place?.hasGottenDetails == false){
-                print("getting details for place with callback \(self.place?.name)")
-                self.place?.getDetailsWith({ () -> Void in
-                    print("in the callback for getting details \(self.place?.name)")
+                // print("getting details for place with callback \(self.place?.name)")
+                self.place?.getDetails({ () -> Void in
+                    // print("in the callback for getting details \(self.place?.name)")
                     if self.isGeometryReady == true {
-                        print("in the callback for getting details and the geometry is set \(self.place?.name) ")
+                        // print("in the callback for getting details and the geometry is set \(self.place?.name) ")
                         //self.showPhoto()
                         if let photo = self.place?.photos.first{
-                            self.kfSetPhoto(photo)
+                            self.sdSetPhoto(photo)
                         }
                     }
                     else{
-                        print("got the details for \(self.place?.name) but geometry not ready")
+                        self.labelNoPhoto.hidden = false
                     }
                 })
+            }
+            else{
+                self.labelNoPhoto.hidden = false
             }
         }
     }
     
-    func kfSetPhoto(photo:GPPhoto!){
+    func sdSetPhoto(photo:GPPhoto!){
+        GPSearchRadar.sharedInstance.sizeImagePrefetch = self.barImageView.frame.size
         let url = photo.getImageRequestUrlThatFitsContainerOfSize(self.barImageView.frame.size)
-        print(url?.description)
-        self.barImageView.kf_setImageWithURL(url!, placeholderImage: nil, optionsInfo: nil, progressBlock: { (receivedSize, totalSize) -> () in
-            // print("Downloading photo of \(self.place?.name): \(receivedSize)/ \(totalSize)")
-            }, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                if (image == nil) {
-                    //print("there was no photo downloaded for \(self.place?.name)")
-                }
-                self.labelNoPhoto.hidden = true
-                //print("finished downloading photo for \(self.place?.name)")
-        })
+        print("setting the image in GPPlaceViewController: \(url)")
         
-    
+        self.barImageView.sd_setImageWithURL(url!, placeholderImage: nil, options: SDWebImageOptions(rawValue: 0), progress: { (receivedSize, totalSize) -> Void in
+            }) { (image, error, imageCacheType, url) -> Void in
+                self.labelNoPhoto.hidden = true
+                print("finished downloading photo for \(self.place?.name) using cachetype: \(imageCacheType.hashValue)")
+        }
     }
-    
-    // tries to show the first photo in the array of photos. Should not be called untill all the 
-    // layout sizes and stuff is ready (viewwillappear).
-//    func showPhoto(){
-//        print("show photo")
-//        if self.place?.photos != nil {
-//            if self.place!.photos.count == 0{
-//                if self.place?.hasGottenDetails == false{
-//                    
-//                    // has no photos has can get details
-//                    self.place?.getDetailsWith({ () -> Void in
-//                        let photo =  self.place?.photos.first
-//                        if photo != nil{
-//                            self.kfSetPhoto(photo!)
-//                        }
-//                    })
-//                }
-//                else{
-//                    // has no photos can not get more details
-//                    self.labelNoPhoto.hidden = false
-//                }
-//            }
-//            else{
-//                // has photos so show one
-//                if let photo = self.place?.photos.first{
-//                    self.kfSetPhoto(photo)
-//                }
-//            }
-//        }
-//    }
     
     func showTypes(){
         if self.place != nil{
@@ -189,7 +167,7 @@ class GPPlaceViewController: UIViewController {
         ofObject object: AnyObject?, change: [String : AnyObject]?,
         context: UnsafeMutablePointer<Void>) {
             if context == &self.place {
-                print("Change at keyPath = \(keyPath) for \(object)")
+                // print("Change at keyPath = \(keyPath) for \(object)")
             }
     }
     

@@ -16,6 +16,8 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     
     static let sharedInstance = GPSearchRadar()
     
+    var sizeImagePrefetch:CGSize?
+    
     /// The desired accuracy
     var desiredAccuracy:Double = 10
     
@@ -31,10 +33,14 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
             NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kGPSearchRadarNewResultsNotifier, object: self))
         }
     }
+    
     /// currentPlace is the place currently being focused on.
     var currentPlace:GPPlace? = nil{
         didSet{
             NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: kGPSearchRadarNewSelectedPlaceNotifier, object: self))
+            if currentPlace != nil{
+                self.preHeat(currentPlace!)
+            }
         }
     }
     func setQuery(query:GPPlacesSearchQuery!){
@@ -49,6 +55,43 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
             self.searchQuery?.delegate = self
         }
     }
+    
+    func preHeat(place:GPPlace){
+        let placeAfter = self.placeAfterPlace(place)
+        let placeBefore = self.placeBeforePlace(place)
+        if self.sizeImagePrefetch != nil{
+            placeAfter?.preHeat(self.sizeImagePrefetch!)
+            placeBefore?.preHeat(self.sizeImagePrefetch!)
+        }
+    }
+    
+    func placeAfterPlace(place:GPPlace!)->GPPlace?{
+        let index = self.indexOfPlace(place)
+        if index != nil{
+            let nextIndex =  index! + 1
+            if nextIndex < places.endIndex{
+                return places[nextIndex]
+            }
+        }
+        return nil
+    }
+
+    func placeBeforePlace(place:GPPlace!)->GPPlace?{
+        let index = self.indexOfPlace(place)
+        if index != nil{
+            let nextIndex =  index! - 1
+            if nextIndex > places.startIndex{
+                return places[nextIndex]
+            }
+        }
+        return nil
+    }
+    
+    func indexOfPlace(place:GPPlace!)->Int?{
+        let indexCP = self.places.indexOf(place)
+        return indexCP
+    }
+    
     /// The maximum distance allowed from the last search query result to the devices current location.
     var distanceFilter:CLLocationDistance{
         set(newDistanceFilter){
@@ -62,8 +105,6 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     override init(){
         // Always check authorisation before creating a CLLocationManger
         // print("initialising search radar")
-
-//        self.locationManager = CLLocationManager()
         super.init()
         self.configureLocationManager()
     }

@@ -163,6 +163,7 @@ class GPPlacesSearchQuery{
             self.searchResults = []             // since we are querying a new area remove the old results
 
             let url = self.createQueryUrl()
+            print("the url with the search string: \(url)")
             
             if (url != nil) {
                 let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
