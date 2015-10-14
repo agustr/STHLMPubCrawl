@@ -30,6 +30,16 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         map.rotateEnabled = false
         map.showAnnotations(map.annotations, animated: true)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
 
     @IBAction func buttonAllNonePressed() {
         showSelectedPlaceOnly = !showSelectedPlaceOnly

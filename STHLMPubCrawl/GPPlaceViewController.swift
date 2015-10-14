@@ -7,7 +7,6 @@
 //
 
 // import Kingfisher
-
 import SDWebImage
 import UIKit
 import Cosmos
@@ -23,11 +22,12 @@ class GPPlaceViewController: UIViewController {
         }
     }
 
-    @IBOutlet var labelNoPhoto: UILabel!
-    @IBOutlet var typesLabel: UILabel!
-    @IBOutlet var labelPlaceName: UILabel!
-    @IBOutlet var barImageView: UIImageView!
+    @IBOutlet weak var labelNoPhoto: UILabel!
+    @IBOutlet weak var typesLabel: UILabel!
+    @IBOutlet weak var labelPlaceName: UILabel!
+    @IBOutlet weak var barImageView: UIImageView!
     @IBOutlet weak var ratingStars: CosmosView!
+    @IBOutlet weak var buttonGoHere: UIButton!
     
     var isGeometryReady: Bool! = false
     
@@ -46,6 +46,17 @@ class GPPlaceViewController: UIViewController {
         self.labelNoPhoto.hidden = true
     }
     
+    @IBAction func goHere(sender: AnyObject) {
+        
+        if ARPlacesVisitPlan.sharedInstance.hasPlace(self.place) == true {
+            ARPlacesVisitPlan.sharedInstance.removePlace(self.place!)
+        }
+        else{
+            ARPlacesVisitPlan.sharedInstance.addPlace(self.place!)
+        }
+        updateUI()
+        
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if self.parentViewController != nil{
@@ -82,9 +93,29 @@ class GPPlaceViewController: UIViewController {
     
     private func updateUI(){
         
+        guard let myPlace = self.place else {
+            // the place has not been set 
+            // maybe show an indicator that we are waiting.
+            print("there is no place in this GPPlaceViewController")
+            
+            return
+        }
+        
+        if (ARPlacesVisitPlan.sharedInstance.hasPlace(myPlace) == true){
+            // make the button green
+            self.buttonGoHere.backgroundColor = UIColor.greenColor()
+        }
+        else{
+            //
+            self.buttonGoHere.backgroundColor = nil
+        }
+        
         if let rate = self.place?.rating{
             self.ratingStars.hidden = false
             self.ratingStars.rating = rate
+        }
+        else{
+            self.ratingStars.hidden = true
         }
     
         if self.labelPlaceName != nil{

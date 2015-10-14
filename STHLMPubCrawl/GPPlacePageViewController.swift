@@ -40,7 +40,7 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
                 let nextPresentedViewController = storyboard.instantiateViewControllerWithIdentifier("GPPlaceViewController") as! GPPlaceViewController
                 nextPresentedViewController.place = GPSearchRadar.sharedInstance.currentPlace
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    self.setViewControllers([nextPresentedViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+                    self.setViewControllers([nextPresentedViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
                 }
             }
         }

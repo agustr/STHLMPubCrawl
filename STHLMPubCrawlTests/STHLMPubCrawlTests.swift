@@ -6,7 +6,9 @@
 //  Copyright © 2015 Agust Rafnsson. All rights reserved.
 //
 
+
 import XCTest
+
 @testable import STHLMPubCrawl
 
 class STHLMPubCrawlTests: XCTestCase {
