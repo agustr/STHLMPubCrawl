@@ -11,6 +11,8 @@ import MapKit
 
 class BarAnnotationView: MKAnnotationView {
     
+    
+    
     var currentPlace:Bool = false{
         didSet{
             if currentPlace == false{
@@ -37,7 +39,6 @@ class BarAnnotationView: MKAnnotationView {
         super.init(frame: frame)
         self.image = UIImage(named: "beer-glass-20-BW")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSelectedPlace", name: kGPSearchRadarNewSelectedPlaceNotifier, object: nil)
-        //print("override init(frame: CGRect)")
     }
     
     func newSelectedPlace (){

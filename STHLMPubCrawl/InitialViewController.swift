@@ -19,6 +19,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     var shouldCenter:Bool = true
     var showSelectedPlaceOnly = false
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "newSonarResultsAvailable", name: kGPSearchRadarNewResultsNotifier, object: nil)

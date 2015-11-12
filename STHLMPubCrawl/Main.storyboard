@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mja-Bm-utU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mja-Bm-utU">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -168,12 +169,22 @@
                                     <action selector="shareOnFacebook" destination="xDG-3q-UbL" eventType="touchUpInside" id="UoL-zo-hiu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fD-yD-2HQ">
+                                <rect key="frame" x="485" y="550" width="38" height="30"/>
+                                <animations/>
+                                <state key="normal" title="share"/>
+                                <connections>
+                                    <action selector="buttonShare" destination="xDG-3q-UbL" eventType="touchUpInside" id="ieT-LW-mOu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6fD-yD-2HQ" firstAttribute="bottom" secondItem="ktZ-jC-loJ" secondAttribute="bottom" id="AJm-5b-UIu"/>
                             <constraint firstItem="ktZ-jC-loJ" firstAttribute="bottom" secondItem="2TY-gv-HaW" secondAttribute="bottom" constant="-20" id="GRb-Yl-4XQ"/>
                             <constraint firstItem="2TY-gv-HaW" firstAttribute="leading" secondItem="Mb0-pR-kJi" secondAttribute="leading" id="PSH-ul-yIR"/>
+                            <constraint firstItem="ktZ-jC-loJ" firstAttribute="leading" secondItem="6fD-yD-2HQ" secondAttribute="trailing" constant="12" id="Rt1-8A-kpi"/>
                             <constraint firstAttribute="trailing" secondItem="2TY-gv-HaW" secondAttribute="trailing" id="ZeN-5D-i3J"/>
                             <constraint firstItem="2TY-gv-HaW" firstAttribute="top" secondItem="vqp-qC-6ov" secondAttribute="bottom" constant="-64" id="js0-Td-5hY"/>
                             <constraint firstItem="2TY-gv-HaW" firstAttribute="bottom" secondItem="InY-eJ-gOo" secondAttribute="top" id="xPJ-xQ-fOU"/>

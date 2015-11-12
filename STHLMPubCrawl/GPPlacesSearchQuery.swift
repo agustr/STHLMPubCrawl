@@ -165,7 +165,7 @@ class GPPlacesSearchQuery{
             let url = self.createQueryUrl()
             print("the url with the search string: \(url)")
             
-            if (url != nil) {
+            if url != nil {
                 let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
                 session.dataTaskWithURL(url!, completionHandler: { (data : NSData?, response : NSURLResponse?, error : NSError?) -> Void in
                     

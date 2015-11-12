@@ -22,7 +22,6 @@
 		8A91568F1BAF056600839503 /* GPSearchRadar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567E1BAF056600839503 /* GPSearchRadar.swift */; settings = {ASSET_TAGS = (); }; };
 		8A9156901BAF056600839503 /* GPPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567F1BAF056600839503 /* GPPlaceViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		8A9156911BAF056600839503 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156801BAF056600839503 /* InitialViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156921BAF056600839503 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156811BAF056600839503 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		8A9156931BAF056600839503 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156821BAF056600839503 /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		8A9156941BAF056600839503 /* Beeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156831BAF056600839503 /* Beeper.swift */; settings = {ASSET_TAGS = (); }; };
 		8A9156951BAF056600839503 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156841BAF056600839503 /* Utilities.swift */; settings = {ASSET_TAGS = (); }; };
@@ -340,7 +339,6 @@
 				8A91569A1BAF056600839503 /* place.txt in Resources */,
 				8A91569C1BAF056600839503 /* beer-glass-40.png in Resources */,
 				8A9156A01BAF05F300839503 /* Main.storyboard in Resources */,
-				8A9156921BAF056600839503 /* Info.plist in Resources */,
 				8A9156A11BAF05F300839503 /* LaunchScreen.xib in Resources */,
 				8A91568E1BAF056600839503 /* Images.xcassets in Resources */,
 			);
@@ -487,10 +485,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Pods/Kingfisher",
-					"$(SRCROOT)/Pods/SDWebImage",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Pods/SDWebImage";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -506,7 +501,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -537,10 +532,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/Pods/Kingfisher",
-					"$(SRCROOT)/Pods/SDWebImage",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Pods/SDWebImage";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -550,7 +542,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -565,11 +557,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = STHLMPubCrawl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agustr.STHLMPubCrawl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -586,11 +576,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = STHLMPubCrawl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agustr.STHLMPubCrawl;
 				PRODUCT_NAME = "$(TARGET_NAME)";

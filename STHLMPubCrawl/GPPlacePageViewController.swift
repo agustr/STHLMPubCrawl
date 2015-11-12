@@ -28,6 +28,7 @@ class GPPlacePageViewController: UIPageViewController, UIPageViewControllerDataS
         self.dataSource = self
     }
     
+    
     deinit{
         // remove self as observer from nsnotificationcenter
         NSNotificationCenter.defaultCenter().removeObserver(self)
