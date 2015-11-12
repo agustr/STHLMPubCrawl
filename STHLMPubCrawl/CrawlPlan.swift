@@ -12,7 +12,7 @@ import Social
 
 class CrawlPlan: UIViewController, MKMapViewDelegate {
 
-    let sharingText:[String] = ["I'm going on an adventure", "Come and share in the beer", "I am a grown-up! I do what I want!", "FOR SCIENCE", "In the olden days drinking was so disorganised...", "I will conquer all the ale!", "EVERYONE FOLLOW ME!", "I think I will leave the car at home!"]
+    private let sharingText:[String] = ["I'm going on an adventure", "Come and share in the beer", "I am a grown-up! I do what I want!", "FOR SCIENCE", "In the olden days drinking was so disorganised...", "I will conquer all the ale!", "EVERYONE FOLLOW ME!", "I think I will leave the car at home!"]
     
     @IBOutlet weak var mapView: MKMapView!
     

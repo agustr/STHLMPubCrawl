@@ -16,8 +16,14 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var buttonAllNone: UIButton!
     
+    @IBOutlet weak var layoutGuideMapBottom: NSLayoutConstraint!
+    
+    var layoutGuideMapBottomMultiplier:CGFloat = 0.5
+    
     var shouldCenter:Bool = true
     var showSelectedPlaceOnly = false
+    
+
 
 
     override func viewDidLoad() {
@@ -34,7 +40,39 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        //layout guide 
+        self.layoutGuideMapBottom.constant = self.view.frame.height * self.layoutGuideMapBottomMultiplier
+        
     }
+    
+    private func adjustLayoutGuides(){
+        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations:
+        { () -> Void in
+            self.layoutGuideMapBottom.constant = self.view.frame.height * self.layoutGuideMapBottomMultiplier
+            self.view.layoutIfNeeded()
+        })
+        { (Bool) -> Void in
+            
+        }
+    }
+    
+    @IBAction func buttonResizeMap(sender: UIButton) {
+        
+        let strUp = "↑"
+        let strDown = "↓"
+        
+        if layoutGuideMapBottomMultiplier == 0.5{
+            layoutGuideMapBottomMultiplier = 0
+            sender.setTitle(strUp, forState: UIControlState.Normal)
+        }
+        else{
+            layoutGuideMapBottomMultiplier = 0.5
+            sender.setTitle(strDown, forState: UIControlState.Normal)
+        }
+        adjustLayoutGuides()
+    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)

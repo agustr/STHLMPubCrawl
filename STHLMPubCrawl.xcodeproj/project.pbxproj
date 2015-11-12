@@ -8,34 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		8A053FBB1BCCF010009B31B4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A053FBA1BCCF010009B31B4 /* Social.framework */; };
-		8A2387A31BC7D88600E06637 /* ARPlaceVisitPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2387A21BC7D88600E06637 /* ARPlaceVisitPlan.swift */; settings = {ASSET_TAGS = (); }; };
-		8A2387A51BC7F4E500E06637 /* CrawlPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2387A41BC7F4E500E06637 /* CrawlPlan.swift */; settings = {ASSET_TAGS = (); }; };
+		8A2387A31BC7D88600E06637 /* ARPlaceVisitPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2387A21BC7D88600E06637 /* ARPlaceVisitPlan.swift */; };
+		8A2387A51BC7F4E500E06637 /* CrawlPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2387A41BC7F4E500E06637 /* CrawlPlan.swift */; };
 		8A4E2BDA1BBEB80500FC8C68 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4E2BD91BBEB80500FC8C68 /* MapKit.framework */; };
 		8A4E2BDC1BBEB81600FC8C68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4E2BDB1BBEB81600FC8C68 /* CoreLocation.framework */; };
 		8A53C8BE1BC2963100F21286 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A53C8BD1BC2963100F21286 /* SDWebImage.framework */; };
-		8A6CA0911BB012ED0062AD2C /* GPPlacePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		8A6CA0951BB129A90062AD2C /* beer-glass-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A6CA0941BB129A90062AD2C /* beer-glass-20.png */; settings = {ASSET_TAGS = (); }; };
+		8A6CA0911BB012ED0062AD2C /* GPPlacePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */; };
+		8A6CA0951BB129A90062AD2C /* beer-glass-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A6CA0941BB129A90062AD2C /* beer-glass-20.png */; };
 		8A9156621BAF04FC00839503 /* STHLMPubCrawlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156611BAF04FC00839503 /* STHLMPubCrawlTests.swift */; };
 		8A91566D1BAF04FC00839503 /* STHLMPubCrawlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91566C1BAF04FC00839503 /* STHLMPubCrawlUITests.swift */; };
-		8A91568D1BAF056600839503 /* GPPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567B1BAF056600839503 /* GPPhoto.swift */; settings = {ASSET_TAGS = (); }; };
-		8A91568E1BAF056600839503 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A91567D1BAF056600839503 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
-		8A91568F1BAF056600839503 /* GPSearchRadar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567E1BAF056600839503 /* GPSearchRadar.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156901BAF056600839503 /* GPPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567F1BAF056600839503 /* GPPlaceViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156911BAF056600839503 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156801BAF056600839503 /* InitialViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156931BAF056600839503 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156821BAF056600839503 /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156941BAF056600839503 /* Beeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156831BAF056600839503 /* Beeper.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156951BAF056600839503 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156841BAF056600839503 /* Utilities.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156971BAF056600839503 /* GPPlacesSearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156861BAF056600839503 /* GPPlacesSearchQuery.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156981BAF056600839503 /* GPPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156871BAF056600839503 /* GPPlace.swift */; settings = {ASSET_TAGS = (); }; };
-		8A9156991BAF056600839503 /* UILabelPadded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156881BAF056600839503 /* UILabelPadded.swift */; settings = {ASSET_TAGS = (); }; };
-		8A91569A1BAF056600839503 /* place.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156891BAF056600839503 /* place.txt */; settings = {ASSET_TAGS = (); }; };
-		8A91569C1BAF056600839503 /* beer-glass-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A91568B1BAF056600839503 /* beer-glass-40.png */; settings = {ASSET_TAGS = (); }; };
-		8A9156A01BAF05F300839503 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569E1BAF05F300839503 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
-		8A9156A11BAF05F300839503 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569F1BAF05F300839503 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
-		8A9A4D741BAF488000376F2D /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8A9A4D731BAF488000376F2D /* beep.wav */; settings = {ASSET_TAGS = (); }; };
-		8AA13CA31BAF472E00AA02B1 /* Sounds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AA13CA21BAF472E00AA02B1 /* Sounds.xcassets */; settings = {ASSET_TAGS = (); }; };
-		8AA4E9D21BBD10D60047BF31 /* BarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4E9D11BBD10D60047BF31 /* BarAnnotationView.swift */; settings = {ASSET_TAGS = (); }; };
-		8AEC405A1BBE862900DEBA94 /* CGSize+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEC40591BBE862900DEBA94 /* CGSize+Utilities.swift */; settings = {ASSET_TAGS = (); }; };
+		8A91568D1BAF056600839503 /* GPPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567B1BAF056600839503 /* GPPhoto.swift */; };
+		8A91568E1BAF056600839503 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A91567D1BAF056600839503 /* Images.xcassets */; };
+		8A91568F1BAF056600839503 /* GPSearchRadar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567E1BAF056600839503 /* GPSearchRadar.swift */; };
+		8A9156901BAF056600839503 /* GPPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91567F1BAF056600839503 /* GPPlaceViewController.swift */; };
+		8A9156911BAF056600839503 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156801BAF056600839503 /* InitialViewController.swift */; };
+		8A9156931BAF056600839503 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156821BAF056600839503 /* AppDelegate.swift */; };
+		8A9156941BAF056600839503 /* Beeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156831BAF056600839503 /* Beeper.swift */; };
+		8A9156951BAF056600839503 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156841BAF056600839503 /* Utilities.swift */; };
+		8A9156971BAF056600839503 /* GPPlacesSearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156861BAF056600839503 /* GPPlacesSearchQuery.swift */; };
+		8A9156981BAF056600839503 /* GPPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156871BAF056600839503 /* GPPlace.swift */; };
+		8A9156991BAF056600839503 /* UILabelPadded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9156881BAF056600839503 /* UILabelPadded.swift */; };
+		8A91569A1BAF056600839503 /* place.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8A9156891BAF056600839503 /* place.txt */; };
+		8A91569C1BAF056600839503 /* beer-glass-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A91568B1BAF056600839503 /* beer-glass-40.png */; };
+		8A9156A01BAF05F300839503 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569E1BAF05F300839503 /* Main.storyboard */; };
+		8A9156A11BAF05F300839503 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A91569F1BAF05F300839503 /* LaunchScreen.xib */; };
+		8A9A4D741BAF488000376F2D /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8A9A4D731BAF488000376F2D /* beep.wav */; };
+		8AA13CA31BAF472E00AA02B1 /* Sounds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AA13CA21BAF472E00AA02B1 /* Sounds.xcassets */; };
+		8AA4E9D21BBD10D60047BF31 /* BarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4E9D11BBD10D60047BF31 /* BarAnnotationView.swift */; };
+		8AEC405A1BBE862900DEBA94 /* CGSize+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEC40591BBE862900DEBA94 /* CGSize+Utilities.swift */; };
 		D23E4FB8CD5CCF8A88B65F03 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A239F55DAACD09943BEE05A8 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 

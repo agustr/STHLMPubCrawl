@@ -3,13 +3,16 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="acI-KM-Mih">
             <objects>
                 <navigationController id="mja-Bm-utU" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zvm-pR-PHh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -35,47 +38,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zhc-WD-iO3">
-                                <rect key="frame" x="0.0" y="20" width="600" height="289.5"/>
-                                <animations/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="bMF-bM-Zyq"/>
-                                </connections>
-                            </mapView>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mkC-tk-ZkS">
-                                <rect key="frame" x="0.0" y="310" width="600" height="289.5"/>
+                                <rect key="frame" x="0.0" y="299" width="600" height="300"/>
                                 <animations/>
                                 <connections>
                                     <segue destination="No3-x1-15x" kind="embed" identifier="placePageSegue" id="jcw-Py-L9a"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEZ-va-Zvn">
-                                <rect key="frame" x="560" y="28" width="30" height="30"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zhc-WD-iO3">
+                                <rect key="frame" x="0.0" y="44.5" width="600" height="254.5"/>
+                                <animations/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="bMF-bM-Zyq"/>
+                                </connections>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEZ-va-Zvn">
+                                <rect key="frame" x="560" y="52" width="30" height="30"/>
                                 <animations/>
                                 <state key="normal" title="One"/>
                                 <connections>
                                     <action selector="buttonAllNonePressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="rAg-ea-2UR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1N-FR-YgX">
-                                <rect key="frame" x="463" y="294" width="127" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1N-FR-YgX">
+                                <rect key="frame" x="463" y="260" width="127" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Show Me The Plan"/>
                                 <connections>
                                     <segue destination="xDG-3q-UbL" kind="show" id="Hkh-gh-QMa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSd-A6-cNS">
+                                <rect key="frame" x="275" y="291" width="50" height="15"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0cj-En-V4X"/>
+                                    <constraint firstAttribute="height" constant="15" id="8NC-yk-BkX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="↓">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonResizeMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c9U-Lj-1GK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PSd-A6-cNS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="762-9V-IMC"/>
                             <constraint firstItem="G1N-FR-YgX" firstAttribute="trailing" secondItem="zhc-WD-iO3" secondAttribute="trailing" constant="-10" id="9Af-bC-oM3"/>
                             <constraint firstItem="mkC-tk-ZkS" firstAttribute="leading" secondItem="zhc-WD-iO3" secondAttribute="trailing" id="ErR-Qb-3sc"/>
                             <constraint firstAttribute="trailing" secondItem="mkC-tk-ZkS" secondAttribute="trailing" id="GbF-6m-Pbm"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="HGP-sG-QCy"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Jol-j0-9WE"/>
+                            <constraint firstItem="mkC-tk-ZkS" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="LOz-oj-ekL"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="width" secondItem="mkC-tk-ZkS" secondAttribute="width" id="LWf-QS-dRk"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mkC-tk-ZkS" secondAttribute="bottom" id="MPu-zW-8Aq"/>
+                            <constraint firstItem="PSd-A6-cNS" firstAttribute="centerY" secondItem="zhc-WD-iO3" secondAttribute="bottom" priority="750" id="Ngu-V9-zNi"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zhc-WD-iO3" secondAttribute="bottom" constant="0.5" id="QAs-Uq-Uv7">
                                 <variation key="heightClass=compact" constant="0.0"/>
                             </constraint>
@@ -84,13 +109,14 @@
                             <constraint firstItem="mkC-tk-ZkS" firstAttribute="width" secondItem="zhc-WD-iO3" secondAttribute="width" id="bXf-5z-XxS"/>
                             <constraint firstItem="mkC-tk-ZkS" firstAttribute="top" secondItem="zhc-WD-iO3" secondAttribute="bottom" constant="1" id="bnf-A9-m9c"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cTE-pG-exk"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zhc-WD-iO3" secondAttribute="bottom" constant="301.5" id="fg9-yz-0Yn"/>
                             <constraint firstItem="mkC-tk-ZkS" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="hg7-NE-ctX"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mkC-tk-ZkS" secondAttribute="bottom" id="hhN-iC-iTb"/>
                             <constraint firstItem="G1N-FR-YgX" firstAttribute="bottom" secondItem="zhc-WD-iO3" secondAttribute="bottom" constant="-8" id="pcf-uu-J0n"/>
                             <constraint firstItem="mkC-tk-ZkS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="qh1-yP-GT7"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sXf-Gs-O8B"/>
                             <constraint firstItem="mkC-tk-ZkS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="seT-lX-QdJ"/>
-                            <constraint firstItem="mkC-tk-ZkS" firstAttribute="height" secondItem="zhc-WD-iO3" secondAttribute="height" id="woX-kG-62b"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PSd-A6-cNS" secondAttribute="bottom" id="vLe-nR-A7s"/>
                             <constraint firstItem="zhc-WD-iO3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xOJ-ha-BBy"/>
                         </constraints>
                         <variation key="default">
@@ -101,6 +127,7 @@
                                 <exclude reference="ErR-Qb-3sc"/>
                                 <exclude reference="GbF-6m-Pbm"/>
                                 <exclude reference="bXf-5z-XxS"/>
+                                <exclude reference="bnf-A9-m9c"/>
                                 <exclude reference="qh1-yP-GT7"/>
                                 <exclude reference="QAs-Uq-Uv7"/>
                                 <exclude reference="hhN-iC-iTb"/>
@@ -121,7 +148,6 @@
                                 <exclude reference="hg7-NE-ctX"/>
                                 <include reference="qh1-yP-GT7"/>
                                 <exclude reference="seT-lX-QdJ"/>
-                                <exclude reference="woX-kG-62b"/>
                                 <exclude reference="MPu-zW-8Aq"/>
                                 <include reference="QAs-Uq-Uv7"/>
                                 <include reference="hhN-iC-iTb"/>
@@ -129,14 +155,16 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="aie-C5-EM9"/>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="buttonAllNone" destination="MEZ-va-Zvn" id="u8d-Xe-ow1"/>
+                        <outlet property="layoutGuideMapBottom" destination="fg9-yz-0Yn" id="Low-O2-3Lg"/>
                         <outlet property="map" destination="zhc-WD-iO3" id="2qc-dj-rHw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="491" y="177"/>
+            <point key="canvasLocation" x="400" y="169"/>
         </scene>
         <!--Crawl Plan-->
         <scene sceneID="oCM-sO-8Wx">
@@ -150,7 +178,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2TY-gv-HaW">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2TY-gv-HaW">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                                 <connections>
@@ -191,6 +219,7 @@
                             <constraint firstItem="ktZ-jC-loJ" firstAttribute="trailing" secondItem="2TY-gv-HaW" secondAttribute="trailing" constant="-20" id="xRB-w2-WiP"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="2TY-gv-HaW" id="cg0-UK-llU"/>
                     </connections>
@@ -202,7 +231,9 @@
         <!--Place Page View Controller-->
         <scene sceneID="fNc-1C-36A">
             <objects>
-                <pageViewController storyboardIdentifier="GPPlacePageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="No3-x1-15x" customClass="GPPlacePageViewController" customModule="STHLMPubCrawl" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="GPPlacePageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="No3-x1-15x" customClass="GPPlacePageViewController" customModule="STHLMPubCrawl" customModuleProvider="target" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIR-WF-hOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1569" y="-733"/>
@@ -219,12 +250,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nonobarimage" translatesAutoresizingMaskIntoConstraints="NO" id="b44-Sp-VqV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="nonobarimage" translatesAutoresizingMaskIntoConstraints="NO" id="b44-Sp-VqV">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw1-uq-Vn2" userLabel="Barname" customClass="UILabelPadded" customModule="STHLMPubCrawl" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw1-uq-Vn2" userLabel="Barname" customClass="UILabelPadded" customModule="STHLMPubCrawl" customModuleProvider="target">
                                 <rect key="frame" x="20" y="28" width="560" height="20"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -285,7 +316,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IrC-zg-5Vb" customClass="CosmosView" customModule="Cosmos">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IrC-zg-5Vb" customClass="CosmosView" customModule="Cosmos">
                                 <rect key="frame" x="20" y="55" width="95" height="15"/>
                                 <animations/>
                                 <userDefinedRuntimeAttributes>
@@ -336,6 +367,7 @@
                             <constraint firstItem="b44-Sp-VqV" firstAttribute="bottom" secondItem="yjg-Rz-KVw" secondAttribute="top" id="xwQ-70-mZJ"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="barImageView" destination="b44-Sp-VqV" id="efV-as-0aF"/>
                         <outlet property="buttonGoHere" destination="hAX-3H-KZv" id="0BC-lE-vlI"/>
