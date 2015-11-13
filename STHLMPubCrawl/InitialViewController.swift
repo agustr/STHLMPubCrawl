@@ -11,7 +11,7 @@ import MapKit
 
 
 
-class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
+class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, ARPlacesVisitPlanDelegate{
 
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var buttonAllNone: UIButton!
@@ -23,8 +23,19 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     var shouldCenter:Bool = true
     var showSelectedPlaceOnly = false
     
+    //delegate functions
+    func placeOrderChanged(sender:ARPlacesVisitPlan){}
+    func routeAdded(route:MKRoute,sender:ARPlacesVisitPlan){
+        self.map.addOverlay(route.polyline)
+    }
+    func routesRemoved(routes:[MKRoute], sender:ARPlacesVisitPlan){}
 
-
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.blueColor()
+        renderer.lineWidth = 5
+        return renderer
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +47,7 @@ class InitialViewController: UIViewController, CLLocationManagerDelegate, MKMapV
         map.showsUserLocation = true
         map.rotateEnabled = false
         map.showAnnotations(map.annotations, animated: true)
+        ARPlacesVisitPlan.sharedInstance.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {

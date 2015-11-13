@@ -166,10 +166,10 @@
             </objects>
             <point key="canvasLocation" x="400" y="169"/>
         </scene>
-        <!--Crawl Plan-->
+        <!--Crawl Plan View Controller-->
         <scene sceneID="oCM-sO-8Wx">
             <objects>
-                <viewController id="xDG-3q-UbL" customClass="CrawlPlan" customModule="STHLMPubCrawl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xDG-3q-UbL" customClass="CrawlPlanViewController" customModule="STHLMPubCrawl" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vqp-qC-6ov"/>
                         <viewControllerLayoutGuide type="bottom" id="InY-eJ-gOo"/>

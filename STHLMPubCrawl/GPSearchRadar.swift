@@ -12,8 +12,6 @@ import MapKit
 
 class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     
-    
-    
     static let sharedInstance = GPSearchRadar()
     
     var sizeImagePrefetch:CGSize?
@@ -25,7 +23,7 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
     var maxNumberOfResults:Int = 50
     
     /// This is the locationmanager for the service. It uses the standard location service, which allows you to specify the desired accuracy of the location data and receive updates as the location changes.
-    private let locationManager:CLLocationManager = CLLocationManager()
+    private let locationManager:CLLocationManager! = CLLocationManager()
     
     /// These are the places that have been retreived from google.
     var places:[GPPlace]! = []{
@@ -43,6 +41,7 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
             }
         }
     }
+    
     func setQuery(query:GPPlacesSearchQuery!){
         self.searchQuery = query
     }
@@ -106,6 +105,7 @@ class GPSearchRadar:NSObject, CLLocationManagerDelegate, GooglePlacesDelegate {
         // Always check authorisation before creating a CLLocationManger
         // print("initialising search radar")
         super.init()
+        
         self.configureLocationManager()
     }
     

@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Social
 
-class CrawlPlan: UIViewController, MKMapViewDelegate {
+class CrawlPlanViewController: UIViewController, MKMapViewDelegate {
 
     private let sharingText:[String] = ["I'm going on an adventure", "Come and share in the beer", "I am a grown-up! I do what I want!", "FOR SCIENCE", "In the olden days drinking was so disorganised...", "I will conquer all the ale!", "EVERYONE FOLLOW ME!", "I think I will leave the car at home!"]
     
@@ -203,7 +203,6 @@ class CrawlPlan: UIViewController, MKMapViewDelegate {
             
             
             for route in routes {
-                
 //                self.routes.append(route)
                 print(" route.name: \(route.name) \n route.advisoryNotices: \(route.advisoryNotices) \n route.distance: \(route.distance) \n route.expectedTravelTime: \(route.expectedTravelTime)")
                 self.mapView.addOverlay(route.polyline)

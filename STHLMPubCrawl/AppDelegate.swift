@@ -20,17 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // do some task
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-       // dispatch_async(dispatch_get_global_queue(priority, 0)) {
+        //let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_main_queue()) {
             GPSearchRadar.sharedInstance
             let gpQuery = GPPlacesSearchQuery (key: nil, rankByDistance: true, keyword: nil, language: nil, minPrice: nil, maxPrice: nil, name: nil, openNow: nil, types: [kGPTypeBar, kGPTypeNightClub])
             
             if gpQuery != nil{
                 GPSearchRadar.sharedInstance.setQuery(gpQuery)
             }
-        //}
-        
-
+        }
         
         return true
     }

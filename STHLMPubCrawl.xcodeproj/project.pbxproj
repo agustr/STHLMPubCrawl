@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A053FBB1BCCF010009B31B4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A053FBA1BCCF010009B31B4 /* Social.framework */; };
 		8A2387A31BC7D88600E06637 /* ARPlaceVisitPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2387A21BC7D88600E06637 /* ARPlaceVisitPlan.swift */; };
-		8A2387A51BC7F4E500E06637 /* CrawlPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2387A41BC7F4E500E06637 /* CrawlPlan.swift */; };
+		8A2387A51BC7F4E500E06637 /* CrawlPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2387A41BC7F4E500E06637 /* CrawlPlanViewController.swift */; };
 		8A4E2BDA1BBEB80500FC8C68 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4E2BD91BBEB80500FC8C68 /* MapKit.framework */; };
 		8A4E2BDC1BBEB81600FC8C68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4E2BDB1BBEB81600FC8C68 /* CoreLocation.framework */; };
 		8A53C8BE1BC2963100F21286 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A53C8BD1BC2963100F21286 /* SDWebImage.framework */; };
@@ -59,7 +59,7 @@
 /* Begin PBXFileReference section */
 		8A053FBA1BCCF010009B31B4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8A2387A21BC7D88600E06637 /* ARPlaceVisitPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARPlaceVisitPlan.swift; sourceTree = "<group>"; };
-		8A2387A41BC7F4E500E06637 /* CrawlPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrawlPlan.swift; sourceTree = "<group>"; };
+		8A2387A41BC7F4E500E06637 /* CrawlPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrawlPlanViewController.swift; sourceTree = "<group>"; };
 		8A3137181BAF2DC6000CBACE /* STHLMPubCrawl-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STHLMPubCrawl-Bridging-Header.h"; sourceTree = "<group>"; };
 		8A4E2BD71BBEB70700FC8C68 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "Pods/../build/Debug-iphoneos/Kingfisher.framework"; sourceTree = "<group>"; };
 		8A4E2BD91BBEB80500FC8C68 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -167,7 +167,7 @@
 				8A6CA0901BB012ED0062AD2C /* GPPlacePageViewController.swift */,
 				8A2387A21BC7D88600E06637 /* ARPlaceVisitPlan.swift */,
 				8A91569E1BAF05F300839503 /* Main.storyboard */,
-				8A2387A41BC7F4E500E06637 /* CrawlPlan.swift */,
+				8A2387A41BC7F4E500E06637 /* CrawlPlanViewController.swift */,
 				8A9156811BAF056600839503 /* Info.plist */,
 				8A9156821BAF056600839503 /* AppDelegate.swift */,
 				8A9156831BAF056600839503 /* Beeper.swift */,
@@ -418,7 +418,7 @@
 				8A9156901BAF056600839503 /* GPPlaceViewController.swift in Sources */,
 				8A9156951BAF056600839503 /* Utilities.swift in Sources */,
 				8A9156981BAF056600839503 /* GPPlace.swift in Sources */,
-				8A2387A51BC7F4E500E06637 /* CrawlPlan.swift in Sources */,
+				8A2387A51BC7F4E500E06637 /* CrawlPlanViewController.swift in Sources */,
 				8AEC405A1BBE862900DEBA94 /* CGSize+Utilities.swift in Sources */,
 				8A91568F1BAF056600839503 /* GPSearchRadar.swift in Sources */,
 				8AA4E9D21BBD10D60047BF31 /* BarAnnotationView.swift in Sources */,
